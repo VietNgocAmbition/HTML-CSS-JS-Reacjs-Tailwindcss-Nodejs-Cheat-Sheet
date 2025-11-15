@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ReactJS & Tailwind Cheat Sheet</title>
+  <link rel="icon" type="image/png" href="logo2.png">
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: #020617;
+      --bg-soft: #0b1120;
+      --accent-pink: #f472b6;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-yellow: #eab308;
+      --accent-purple: #a855f7;
+      --accent-red: #fb7185;
+      --accent-orange: #fb923c;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --code-bg: #020617;
+      --border-soft: rgba(148, 163, 184, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 60%);
+      color: var(--text-main);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #f9fafb;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+      font-size: 0.96rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(236, 72, 153, 0.18));
+      margin-bottom: 10px;
+    }
+
+    .badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-green);
+    }
+
+    .section {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sec-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .pill {
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #020617;
+    }
+
+    .pill.structure {
+      background: var(--accent-blue);
+    }
+
+    .pill.text {
+      background: var(--accent-pink);
+    }
+
+    .pill.link {
+      background: var(--accent-orange);
+    }
+
+    .pill.list {
+      background: var(--accent-yellow);
+    }
+
+    .pill.table {
+      background: var(--accent-green);
+    }
+
+    .pill.form {
+      background: var(--accent-purple);
+    }
+
+    .pill.semantic {
+      background: #22d3ee;
+    }
+
+    .pill.media {
+      background: #facc15;
+    }
+
+    .pill.meta {
+      background: #22c55e;
+    }
+
+    .pill.other {
+      background: #fb7185;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-soft);
+    }
+
+    .tag-react {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: #e0f2fe;
+    }
+
+    .tag-tailwind {
+      border-color: rgba(52, 211, 153, 0.9);
+      color: #bbf7d0;
+    }
+
+    p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+
+    ul,
+    ol {
+      margin: 6px 0 8px 18px;
+      font-size: 0.94rem;
+    }
+
+    li+li {
+      margin-top: 3px;
+    }
+
+    code {
+      background-color: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 0.86rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    pre {
+      background-color: var(--code-bg);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      overflow-x: auto;
+      font-size: 0.86rem;
+      margin: 8px 0;
+    }
+
+    pre code {
+      border: none;
+      padding: 0;
+      background: transparent;
+    }
+
+    .sub-title {
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-top: 4px;
+      margin-bottom: 4px;
+      font-size: 0.94rem;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .important {
+      border-left: 3px solid var(--accent-yellow);
+      padding-left: 10px;
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    .flag-hot {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(248, 113, 113, 0.1);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .flag-hot span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #fecaca;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0 12px 28px;
+      }
+    }
+
+    /* ===== Khung tìm kiếm dùng chung ===== */
+
+    .search-wrapper {
+      position: sticky;
+      top: 50px;
+      z-index: 40;
+      max-width: 680px;
+      margin: 12px auto 18px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: linear-gradient(135deg,
+          rgba(15, 23, 42, 0.95),
+          rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 6px 8px 6px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .search-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-blue);
+    }
+
+    .search-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      padding: 4px 8px;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-soft);
+      opacity: 0.8;
+    }
+
+    .search-btn {
+      flex-shrink: 0;
+      border: none;
+      outline: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: linear-gradient(135deg,
+          var(--accent-blue),
+          var(--accent-pink));
+      color: #0b1120;
+      box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 9px 22px rgba(56, 189, 248, 0.55);
+      filter: brightness(1.05);
+    }
+
+    .search-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.8);
+    }
+
+    .search-hint {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .search-results {
+      margin-top: 6px;
+      padding: 4px 0;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      list-style: none;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .search-results:empty {
+      display: none;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+
+    .search-result-item:hover,
+    .search-result-item.is-active {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .search-result-icon {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-soft);
+      font-size: 0.65rem;
+    }
+
+    .search-result-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .search-result-title {
+      color: var(--text-main);
+      font-weight: 500;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-snippet {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-empty {
+      padding: 6px 10px;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .search-hit {
+      outline: 2px solid var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+      border-radius: 6px;
+      animation: searchBlink 1s ease-out 0s 1;
+    }
+
+    @keyframes searchBlink {
+      0% {
+        background-color: rgba(56, 189, 248, 0.22);
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    /* Tabs React / Tailwind */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 8px 0 18px;
+    }
+
+    .tab-btn {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+    }
+
+    .tab-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-blue);
+    }
+
+    .tab-btn.active {
+      color: #0b1120;
+      border-color: var(--accent-blue);
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+      transform: translateY(-1px);
+    }
+
+    .tab-btn.active .tab-dot {
+      background: #0b1120;
+    }
+
+    .panel {
+      display: none;
+      margin-top: 4px;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* ===== MENU 5 FILE ===== */
+    .top-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 4px 0 18px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      backdrop-filter: none;
+      position: sticky;
+      top: 0;
+      z-index: 60;
+    }
+
+    .top-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.12s ease;
+    }
+
+    .top-tab-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-blue);
+    }
+
+    /* Hover */
+    .top-tab-btn:hover {
+      color: #e5e7eb;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Active = file hiện tại */
+    .top-tab-btn.active {
+      color: #0b1120;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+      box-shadow:
+        0 0 25px rgba(56, 189, 248, 0.6),
+        0 12px 25px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .top-tab-btn.active .top-tab-dot {
+      background: #0b1120;
+    }
+
+    .author-links {
+      margin-bottom: 26px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      /* tăng khoảng cách để không dính chùm */
+      flex-wrap: wrap;
+    }
+
+    .author-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      /* tách icon với chữ */
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-main);
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .author-item:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Icon GitHub */
+    .github-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-blue);
+    }
+
+    /* Icon tiền Donate */
+    .money-icon {
+      width: 20px;
+      height: 20px;
+      color: #0b1120;
+      /* icon sáng nổi */
+    }
+
+    /* Donate style */
+    .donate-box {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #0b1120;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.35);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>REACTJS & TAILWIND Cheat Sheet</h1>
+  <p class="subtitle"> ReactJS + Tailwind CSS.</p>
+  <p class="subtitle">- Ikigai, Kaizen, Shu-Ha-Ri -</p>
+  <div class="author-links">
+    <a href="https://github.com/VietNgocAmbition" target="_blank" class="author-item">
+      <svg class="github-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 19c-4.3 1-4.3-2.5-6-3m12 5v-3.5c0-.9.1-1.3-.5-2 
+               2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 
+               4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C7 2.8 6 3 6 3 
+               a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.6 9.4c0 4.5 2.7 5.7 5.5 6 
+               -.3.4-.6 1.1-.7 2V21" />
+      </svg>
+      <span>GitHub: VietNgocAmbition</span>
+    </a>
+
+    <div class="author-item donate-box">
+      <svg class="money-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M2 10c2 0 3-2 3-2m17 2c-2 0-3-2-3-2m-14 6c2 0 3 2 3 2m14-2c-2 0-3 2-3 2"></path>
+      </svg>
+      <span>Donate: TPBank - 26304032004</span>
+    </div>
+  </div>
+
+  <nav class="top-tabs">
+    <a href="Html.html" class="top-tab-btn" id="tab-html">
+      <span class="top-tab-dot"></span>
+      HTML
+    </a>
+    <a href="Css.html" class="top-tab-btn" id="tab-css">
+      <span class="top-tab-dot"></span>
+      CSS
+    </a>
+    <a href="Js.html" class="top-tab-btn" id="tab-js">
+      <span class="top-tab-dot"></span>
+      JavaScript
+    </a>
+    <a href="ReacjsTailwind.html" class="top-tab-btn" id="tab-react">
+      <span class="top-tab-dot"></span>
+      ReactJS & Tailwind
+    </a>
+    <a href="NodeJs.html" class="top-tab-btn" id="tab-node">
+      <span class="top-tab-dot"></span>
+      NodeJS
+    </a>
+
+  </nav>
+  <!-- Khung tìm kiếm + dropdown kết quả -->
+  <div class="search-wrapper">
+    <div class="search-bar">
+      <span class="search-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M10.5 4a6.5 6.5 0 0 1 5.11 10.57l3.91 3.91a1 1 0 0 1-1.42 1.42l-3.91-3.91A6.5 6.5 0 1 1 10.5 4zm0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z" />
+        </svg>
+      </span>
+      <input type="text" class="search-input"
+        placeholder="Tìm trong tab hiện tại: useState, Context, flex, bg-slate-900...">
+      <button class="search-btn" type="button">
+        Tìm kiếm
+      </button>
+    </div>
+    <p class="search-hint">
+      Gõ từ khóa rồi nhấn <strong>Enter</strong> hoặc nút <strong>Tìm kiếm</strong>. Mỗi tab chỉ tìm trong nội dung của
+      tab đó.
+    </p>
+    <ul class="search-results"></ul>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-target="panel-react">
+      <span class="tab-dot"></span>
+      ReactJS (15 mục)
+    </button>
+    <button class="tab-btn" data-target="panel-tailwind">
+      <span class="tab-dot"></span>
+      Tailwind CSS (15 mục)
+    </button>
+  </div>
+
+  <div class="badge"><span></span> ReactJS & Tailwind </div>
+
+  <div id="panel-react" class="panel active">
+
+    <!-- 1. JSX -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill structure">R1</div>
+          <h2>1. JSX cơ bản<span class="flag-hot"><span></span>RẤT HAY GẶP</span></h2>
+        </div>
+        <span class="tag tag-react">React Core</span>
+      </div>
+
+      <p>JSX cho phép viết “HTML trong JavaScript”, thực ra là hàm <code>React.createElement</code> được compile.</p>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp &amp; Giải thích</p>
+          <pre><code>// JSX phải có 1 root element
+function Hello() {
+  const name = "Ngọc";
+  const age = 21;
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Xin chào, {name}!&lt;/h2&gt;
+      &lt;p&gt;Tuổi: {age}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <ul>
+            <li>Dùng <code>{'{...}'}</code> để nhúng JS (biến, expression).</li>
+            <li>Thuộc tính dùng camelCase: <code>className</code>, <code>onClick</code>...</li>
+          </ul>
+        </div>
+        <div>
+          <p class="sub-title">Kết quả hiển thị</p>
+          <pre><code>&lt;div&gt;
+  &lt;h2&gt;Xin chào, Ngọc!&lt;/h2&gt;
+  &lt;p&gt;Tuổi: 21&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          <p class="note">💡 JSX <strong>không phải</strong> HTML: có thêm logic JS, phải tuân camelCase, không dùng
+            <code>class</code> mà dùng <code>className</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Component -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill text">R2</div>
+          <h2>2. Functional Component<span class="flag-hot"><span></span>LÕI REACT</span></h2>
+        </div>
+        <span class="tag tag-react">Components</span>
+      </div>
+
+      <p>Component là hàm JS trả về JSX, được React render thành UI. Tên component phải viết hoa chữ cái đầu.</p>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp</p>
+          <pre><code>function ButtonPrimary() {
+  return (
+    &lt;button className="btn-primary"&gt;
+      Click me
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Sử dụng trong App</p>
+          <pre><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;ButtonPrimary /&gt;
+      &lt;ButtonPrimary /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="note">⚡ Mỗi component xử lý 1 chức năng/giao diện nhỏ → dễ tái sử dụng &amp; test.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Props -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill link">R3</div>
+          <h2>3. Props – truyền dữ liệu từ cha xuống con<span class="flag-hot"><span></span>RẤT HAY GẶP</span></h2>
+        </div>
+        <span class="tag tag-react">Props</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp &amp; Giải thích</p>
+          <pre><code>function UserCard({ name, age }) {
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;{name}&lt;/h3&gt;
+      &lt;p&gt;Tuổi: {age}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <ul>
+            <li>Props là <strong>tham số</strong> của component.</li>
+            <li>Không được sửa trực tiếp props: chỉ đọc.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="sub-title">Ví dụ dùng &amp; Kết quả</p>
+          <pre><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;UserCard name="Ngọc" age={21} /&gt;
+      &lt;UserCard name="Lan" age={20} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="note">➡️ Render ra 2 card user với tên &amp; tuổi khác nhau.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. State + useState -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.list">R4</div>
+          <h2>4. State &amp; useState<span class="flag-hot"><span></span>LÕI QUẢN LÝ DỮ LIỆU</span></h2>
+        </div>
+        <span class="tag tag-react">State</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp</p>
+          <pre><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(prev =&gt; prev + 1);
+  }
+
+  return (
+    &lt;button onClick={handleClick}&gt;
+      Đã bấm {count} lần
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Giải thích &amp; Lưu ý</p>
+          <ul>
+            <li><code>useState(0)</code>: giá trị khởi tạo = 0.</li>
+            <li><code>setCount</code> làm component re-render với giá trị mới.</li>
+            <li>Dùng callback <code>prev =&gt; prev + 1</code> khi phụ thuộc vào state cũ.</li>
+          </ul>
+          <p class="note">❌ Không làm: <code>count++</code> hoặc <code>count = count + 1</code> rồi mong UI tự cập nhật.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Event -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.table">R5</div>
+          <h2>5. Event trong React (onClick, onChange...)</h2>
+        </div>
+        <span class="tag tag-react">Events</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>function LoginButton() {
+  function handleClick() {
+    alert("Đăng nhập thành công (fake)");
+  }
+
+  return (
+    &lt;button onClick={handleClick}&gt;
+      Đăng nhập
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Form + onChange</p>
+          <pre><code>function InputName() {
+  const [name, setName] = useState("");
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        value={name}
+        onChange={e =&gt; setName(e.target.value)}
+      /&gt;
+      &lt;p&gt;Xin chào: {name}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="note">💡 Event trong React dùng camelCase: <code>onClick</code>, <code>onSubmit</code>,
+            <code>onChange</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Conditional rendering -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.form">R6</div>
+          <h2>6. Conditional Rendering (rẽ nhánh UI)</h2>
+        </div>
+        <span class="tag tag-react">Conditional</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp hay dùng</p>
+          <pre><code>// Toán tử 3 ngôi
+{isLoggedIn ? &lt;Dashboard /&gt; : &lt;LoginForm /&gt;}
+
+// Toán tử &amp;&amp;
+{loading &amp;&amp; &lt;p&gt;Đang tải...&lt;/p&gt;}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>function Status({ isOnline }) {
+  return (
+    &lt;p&gt;
+      Trạng thái:{" "}
+      {isOnline ? "Đang online" : "Offline"}
+    &lt;/p&gt;
+  );
+}</code></pre>
+          <p class="note">✅ Không dùng <code>if</code> trực tiếp trong JSX, mà đặt logic bên ngoài, hoặc dùng toán tử 3
+            ngôi/&amp;&amp;.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. List & key -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.semantic">R7</div>
+          <h2>7. Render list &amp; key<span class="flag-hot"><span></span>RẤT HAY GẶP</span></h2>
+        </div>
+        <span class="tag tag-react">List &amp; Key</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>const todos = [
+  { id: 1, text: "Học React" },
+  { id: 2, text: "Học Tailwind" },
+];
+
+function TodoList() {
+  return (
+    &lt;ul&gt;
+      {todos.map(item =&gt; (
+        &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Lưu ý</p>
+          <ul>
+            <li><code>key</code> phải unique &amp; stable (id).</li>
+            <li>Tránh dùng index nếu list thay đổi (thêm/xóa/sort).</li>
+          </ul>
+          <p class="note">⚠️ Key giúp React nhận diện phần tử nào thay đổi để tối ưu re-render.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. useEffect -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.media">R8</div>
+          <h2>8. useEffect – Side effects<span class="flag-hot"><span></span>API / SUBSCRIBE</span></h2>
+        </div>
+        <span class="tag tag-react">Hooks</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Fetch API 1 lần khi mount</p>
+          <pre><code>import { useEffect, useState } from "react";
+
+function Users() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() =&gt; {
+    async function fetchUsers() {
+      const res = await fetch("/api/users");
+      const data = await res.json();
+      setUsers(data);
+    }
+
+    fetchUsers();
+  }, []); // []: chỉ chạy 1 lần
+
+  return &lt;div&gt;...&lt;/div&gt;;
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Cleanup</p>
+          <pre><code>useEffect(() =&gt; {
+  const id = setInterval(() =&gt; {
+    console.log("tick");
+  }, 1000);
+
+  return () =&gt; clearInterval(id);
+}, []);</code></pre>
+          <p class="note">💡 <code>return</code> trong <code>useEffect</code> dùng để cleanup: clear interval, remove
+            event
+            listener, unsubscribe socket...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. useRef -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.meta">R9</div>
+          <h2>9. useRef – giữ giá trị &amp; truy cập DOM</h2>
+        </div>
+        <span class="tag tag-react">Hooks</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Truy cập DOM</p>
+          <pre><code>function FocusInput() {
+  const inputRef = useRef(null);
+
+  function handleFocus() {
+    inputRef.current?.focus();
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputRef} /&gt;
+      &lt;button onClick={handleFocus}&gt;
+        Focus
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Giữ giá trị qua render</p>
+          <pre><code>function Counter() {
+  const [value, setValue] = useState(0);
+  const renderCount = useRef(0);
+
+  useEffect(() =&gt; {
+    renderCount.current += 1;
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Value: {value}&lt;/p&gt;
+      &lt;p&gt;Render: {renderCount.current}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="note">🧠 Thay đổi <code>ref.current</code> <strong>không</strong> làm re-render component.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. useMemo / useCallback -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.other">R10</div>
+          <h2>10. useMemo &amp; useCallback – tối ưu hiệu năng</h2>
+        </div>
+        <span class="tag tag-react">Performance</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">useMemo – cache kết quả</p>
+          <pre><code>const expensive = useMemo(() =&gt; {
+  // tính toán nặng
+  return list.filter(x =&gt; x.active);
+}, [list]);</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">useCallback – cache function</p>
+          <pre><code>const handleClick = useCallback(() =&gt; {
+  console.log("clicked");
+}, []);</code></pre>
+          <p class="note">💡 Dùng khi truyền function/giá trị xuống component con nặng + bọc con bằng
+            <code>React.memo</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Custom hook -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.structure">R11</div>
+          <h2>11. Custom Hook – tái sử dụng logic</h2>
+        </div>
+        <span class="tag tag-react">Hooks</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp</p>
+          <pre><code>function useToggle(initial = false) {
+  const [value, setValue] = useState(initial);
+  const toggle = () =&gt; setValue(v =&gt; !v);
+  return [value, toggle];
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Sử dụng</p>
+          <pre><code>function Panel() {
+  const [open, toggleOpen] = useToggle(false);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={toggleOpen}&gt;
+        {open ? "Đóng" : "Mở"}
+      &lt;/button&gt;
+      {open &amp;&amp; &lt;p&gt;Nội dung panel&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Context API -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.text">R12</div>
+          <h2>12. Context API – tránh props drilling</h2>
+        </div>
+        <span class="tag tag-react">Context</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Tạo Context</p>
+          <pre><code>const ThemeContext = createContext("light");
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
+  const value = { theme, setTheme };
+
+  return (
+    &lt;ThemeContext.Provider value={value}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Dùng Context</p>
+          <pre><code>function ThemeSwitcher() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    &lt;button
+      onClick={() =&gt; setTheme(theme === "dark" ? "light" : "dark")}
+    &gt;
+      Theme hiện tại: {theme}
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. React Router -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.link">R13</div>
+          <h2>13. React Router<span class="flag-hot"><span></span>SPA ROUTING</span></h2>
+        </div>
+        <span class="tag tag-react">Routing</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cấu hình router</p>
+          <pre><code>import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;nav&gt;
+        &lt;Link to="/"&gt;Home&lt;/Link&gt;
+        &lt;Link to="/about"&gt;About&lt;/Link&gt;
+      &lt;/nav&gt;
+
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Lấy param &amp; điều hướng</p>
+          <pre><code>const { id } = useParams();   // /users/:id
+const navigate = useNavigate();
+
+function goHome() {
+  navigate("/");
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Form controlled/uncontrolled -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.list">R14</div>
+          <h2>14. Form: Controlled vs Uncontrolled<span class="flag-hot"><span></span>FORM LỚN</span></h2>
+        </div>
+        <span class="tag tag-react">Forms</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Controlled component</p>
+          <pre><code>function LoginForm() {
+  const [email, setEmail] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(email);
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input
+        value={email}
+        onChange={e =&gt; setEmail(e.target.value)}
+      /&gt;
+      &lt;button type="submit"&gt;Gửi&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Uncontrolled + ref</p>
+          <pre><code>function SimpleForm() {
+  const inputRef = useRef(null);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(inputRef.current.value);
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input ref={inputRef} /&gt;
+      &lt;button&gt;Gửi&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Performance & memo -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.table">R15</div>
+          <h2>15. Tối ưu hiệu năng: React.memo, lazy, Suspense</h2>
+        </div>
+        <span class="tag tag-react">Performance</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">React.memo</p>
+          <pre><code>const Child = React.memo(function Child({ value }) {
+  console.log("render child");
+  return &lt;p&gt;Value: {value}&lt;/p&gt;;
+});</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Code splitting</p>
+          <pre><code>const Page = React.lazy(() =&gt; import("./Page"));
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;p&gt;Loading...&lt;/p&gt;}&gt;
+      &lt;Page /&gt;
+    &lt;/Suspense&gt;
+  );
+}</code></pre>
+          <p class="note">💡 Dùng khi app lớn, nhiều page – tránh load toàn bộ code 1 lần.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ======================= PANEL TAILWIND ======================= -->
+  <div id="panel-tailwind" class="panel">
+
+    <!-- T1. Cài đặt -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.structure">T1</div>
+          <h2>1. Cài đặt &amp; tư duy Utility-first<span class="flag-hot"><span></span>RẤT HAY GẶP</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Setup</span>
+      </div>
+
+      <p>Tailwind là CSS framework <strong>utility-first</strong> – style bằng class siêu nhỏ: <code>p-4</code>,
+        <code>bg-slate-900</code>, <code>flex</code>...
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cú pháp cấu hình (Vite/React)</p>
+          <pre><code>// tailwind.config.js
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: { extend: {} },
+  plugins: [],
+};</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Thêm vào CSS</p>
+          <pre><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;</code></pre>
+          <p class="note">💡 Sau đó dùng class trực tiếp trên JSX: <code>className="bg-slate-900 text-white p-4"</code>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- T2. Spacing -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.text">T2</div>
+          <h2>2. Spacing: margin, padding, width, height<span class="flag-hot"><span></span>CỰC NHIỀU</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Spacing</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>&lt;div className="p-4 m-6 w-64 h-32 bg-slate-800"&gt;
+  Box
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Các class hay dùng</p>
+          <ul>
+            <li><code>p-0 → p-10</code>, <code>px-4</code>, <code>py-2</code></li>
+            <li><code>m-0 → m-10</code>, <code>mx-auto</code>, <code>mt-4</code></li>
+            <li><code>w-full</code>, <code>w-1/2</code>, <code>max-w-xl</code></li>
+            <li><code>h-10</code>, <code>min-h-screen</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T3. Flexbox -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.link">T3</div>
+          <h2>3. Flexbox trong Tailwind<span class="flag-hot"><span></span>LAYOUT CHÍNH</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Flexbox</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ row</p>
+          <pre><code>&lt;div className="flex items-center justify-between gap-4"&gt;
+  &lt;div className="w-1/3 bg-slate-700 h-16"&gt;A&lt;/div&gt;
+  &lt;div className="w-1/3 bg-slate-600 h-16"&gt;B&lt;/div&gt;
+  &lt;div className="w-1/3 bg-slate-500 h-16"&gt;C&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay dùng</p>
+          <ul>
+            <li><code>flex</code>, <code>inline-flex</code></li>
+            <li><code>flex-row</code>, <code>flex-col</code></li>
+            <li><code>items-center</code>, <code>items-start</code>, <code>items-end</code></li>
+            <li><code>justify-center</code>, <code>justify-between</code>, <code>justify-end</code></li>
+            <li><code>gap-2</code>, <code>gap-4</code>, <code>gap-6</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T4. Grid -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.list">T4</div>
+          <h2>4. CSS Grid</h2>
+        </div>
+        <span class="tag tag-tailwind">Grid</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ 3 cột</p>
+          <pre><code>&lt;div className="grid grid-cols-3 gap-4"&gt;
+  &lt;div className="bg-slate-700 h-16"&gt;1&lt;/div&gt;
+  &lt;div className="bg-slate-600 h-16"&gt;2&lt;/div&gt;
+  &lt;div className="bg-slate-500 h-16"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay dùng</p>
+          <ul>
+            <li><code>grid</code>, <code>grid-cols-1 → grid-cols-12</code></li>
+            <li><code>gap-2</code>, <code>gap-x-4</code>, <code>gap-y-4</code></li>
+            <li><code>col-span-2</code>, <code>row-span-2</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T5. Background -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.table">T5</div>
+          <h2>5. Background &amp; gradient</h2>
+        </div>
+        <span class="tag tag-tailwind">Background</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ gradient</p>
+          <pre><code>&lt;div className="
+  p-6 rounded-xl
+  bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500
+"&gt;
+  Card xịn
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class phổ biến</p>
+          <ul>
+            <li><code>bg-slate-900</code>, <code>bg-zinc-800</code>, <code>bg-white</code></li>
+            <li><code>bg-gradient-to-r</code>, <code>from-*</code>, <code>via-*</code>, <code>to-*</code></li>
+            <li><code>bg-cover</code>, <code>bg-center</code> (dùng với ảnh nền custom)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T6. Border -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.form">T6</div>
+          <h2>6. Border, radius, ring</h2>
+        </div>
+        <span class="tag tag-tailwind">Border</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>&lt;button className="
+  px-4 py-2
+  border border-sky-400
+  rounded-xl
+  hover:ring-2 hover:ring-sky-500
+"&gt;
+  Button
+&lt;/button&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay gặp</p>
+          <ul>
+            <li><code>border</code>, <code>border-2</code>, <code>border-slate-700</code></li>
+            <li><code>rounded</code>, <code>rounded-lg</code>, <code>rounded-full</code></li>
+            <li><code>ring-1</code>, <code>ring-2</code>, <code>ring-sky-500</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T7. Typography -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.semantic">T7</div>
+          <h2>7. Typography – font, size, weight</h2>
+        </div>
+        <span class="tag tag-tailwind">Typography</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>&lt;h1 className="text-3xl font-bold text-slate-50"&gt;
+  Tiêu đề
+&lt;/h1&gt;
+&lt;p className="text-sm text-slate-400"&gt;
+  Mô tả nhỏ nhỏ
+&lt;/p&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay gặp</p>
+          <ul>
+            <li><code>text-xs → text-4xl</code>, <code>text-slate-400</code></li>
+            <li><code>font-light</code>, <code>font-normal</code>, <code>font-semibold</code>, <code>font-bold</code>
+            </li>
+            <li><code>text-center</code>, <code>text-right</code>, <code>text-justify</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T8. Shadow -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.media">T8</div>
+          <h2>8. Shadow &amp; elevation</h2>
+        </div>
+        <span class="tag tag-tailwind">Shadow</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>&lt;div className="
+  p-4 rounded-2xl
+  bg-slate-900
+  shadow-lg shadow-sky-500/25
+"&gt;
+  Card có bóng
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay dùng</p>
+          <ul>
+            <li><code>shadow-sm</code>, <code>shadow</code>, <code>shadow-md</code>, <code>shadow-lg</code></li>
+            <li>Có thể custom màu: <code>shadow-sky-500/30</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T9. Position -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.meta">T9</div>
+          <h2>9. Position: absolute, fixed, z-index</h2>
+        </div>
+        <span class="tag tag-tailwind">Position</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Badge góc card</p>
+          <pre><code>&lt;div className="relative p-4 bg-slate-800 rounded-xl"&gt;
+  &lt;span className="
+    absolute top-2 right-2
+    px-2 py-1 text-xs
+    bg-rose-500 text-white rounded-full
+  "&gt;
+    HOT
+  &lt;/span&gt;
+  Nội dung card
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class cơ bản</p>
+          <ul>
+            <li><code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code></li>
+            <li><code>top-0</code>, <code>right-4</code>, <code>bottom-2</code>, <code>left-1/2</code></li>
+            <li><code>z-10</code>, <code>z-20</code>, <code>z-50</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T10. Responsive -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.other">T10</div>
+          <h2>10. Responsive – breakpoint<span class="flag-hot"><span></span>RẤT QUAN TRỌNG</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Responsive</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ flex đổi theo màn hình</p>
+          <pre><code>&lt;div className="flex flex-col md:flex-row gap-4"&gt;
+  &lt;div className="flex-1 bg-slate-700 h-24"&gt;A&lt;/div&gt;
+  &lt;div className="flex-1 bg-slate-600 h-24"&gt;B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Prefix breakpoint</p>
+          <ul>
+            <li><code>sm:</code> ≥ 640px</li>
+            <li><code>md:</code> ≥ 768px</li>
+            <li><code>lg:</code> ≥ 1024px</li>
+            <li><code>xl:</code> ≥ 1280px</li>
+            <li>Ví dụ: <code>text-sm md:text-base lg:text-lg</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T11. Component button -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.structure">T11</div>
+          <h2>11. Pattern: Button Tailwind</h2>
+        </div>
+        <span class="tag tag-tailwind">Component</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Ví dụ</p>
+          <pre><code>function PrimaryButton({ children }) {
+  return (
+    &lt;button
+      className="
+        inline-flex items-center justify-center
+        px-4 py-2 rounded-xl
+        bg-sky-500 hover:bg-sky-400
+        text-slate-900 font-semibold
+        shadow-md shadow-sky-500/30
+        transition
+      "
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Ý tưởng</p>
+          <p>Đóng gói class Tailwind thành component React để:</p>
+          <ul>
+            <li>Không lặp lại class dài.</li>
+            <li>Dễ đổi theme toàn bộ project.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T12. Form style -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.text">T12</div>
+          <h2>12. Style form với Tailwind</h2>
+        </div>
+        <span class="tag tag-tailwind">Form</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Input cơ bản</p>
+          <pre><code>&lt;input
+  className="
+    w-full px-3 py-2
+    rounded-lg
+    bg-slate-900 border border-slate-700
+    text-slate-100
+    focus:outline-none
+    focus:ring-2 focus:ring-sky-500
+  "
+  placeholder="Nhập email..."
+/&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Label + helper text</p>
+          <pre><code>&lt;label className="block text-sm font-medium mb-1"&gt;
+  Email
+&lt;/label&gt;
+&lt;p className="text-xs text-slate-400 mt-1"&gt;
+  Không chia sẻ email cho ai đâu.
+&lt;/p&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- T13. Dark mode -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.link">T13</div>
+          <h2>13. Dark mode<span class="flag-hot"><span></span>RẤT HAY DÙNG</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Dark Mode</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Config</p>
+          <pre><code>// tailwind.config.js
+module.exports = {
+  darkMode: "class",
+  // ...
+};</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Dùng class</p>
+          <pre><code>&lt;div className="
+  bg-white text-slate-900
+  dark:bg-slate-950 dark:text-slate-50
+"&gt;
+  Nội dung
+&lt;/div&gt;</code></pre>
+          <p class="note">💡 Toggle dark mode bằng cách thêm/xóa class <code>dark</code> trên <code>&lt;html&gt;</code>
+            hoặc <code>&lt;body&gt;</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- T14. Transition -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.list">T14</div>
+          <h2>14. Transition &amp; animation</h2>
+        </div>
+        <span class="tag tag-tailwind">Animation</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Hover scale</p>
+          <pre><code>&lt;div className="
+  p-4 bg-slate-800 rounded-xl
+  transform transition
+  hover:scale-105 hover:-translate-y-1
+"&gt;
+  Card hover
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Class hay dùng</p>
+          <ul>
+            <li><code>transition</code>, <code>transition-colors</code>, <code>transition-all</code></li>
+            <li><code>duration-150</code>, <code>duration-300</code></li>
+            <li><code>ease-in</code>, <code>ease-out</code>, <code>ease-in-out</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- T15. Theme extend -->
+    <section class="section">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="pill.table">T15</div>
+          <h2>15. Custom theme – extend màu, font<span class="flag-hot"><span></span>PROJECT LỚN</span></h2>
+        </div>
+        <span class="tag tag-tailwind">Theme</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="sub-title">Cấu hình extend</p>
+          <pre><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        ocean: {
+          50: "#0f172a",
+          100: "#1e293b",
+          300: "#38bdf8",
+          500: "#0ea5e9",
+          900: "#020617",
+        },
+      },
+      borderRadius: {
+        "2xl": "1rem",
+      },
+    },
+  },
+};</code></pre>
+        </div>
+        <div>
+          <p class="sub-title">Sử dụng màu custom</p>
+          <pre><code>&lt;div className="bg-ocean-900 text-ocean-300 p-4 rounded-2xl"&gt;
+  Sango / Flood project theme
+&lt;/div&gt;</code></pre>
+          <p class="note">💡 Dùng <code>extend</code> để không mất các màu mặc định của Tailwind.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    (function () {
+      const input = document.querySelector('.search-input');
+      const btn = document.querySelector('.search-btn');
+      const resultsEl = document.querySelector('.search-results');
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.panel');
+
+      if (!input || !btn || !resultsEl) return;
+
+      let data = [];
+      let currentResults = [];
+      let activeIndex = -1;
+
+      function clearHighlight() {
+        document.querySelectorAll('.search-hit').forEach(el => {
+          el.classList.remove('search-hit');
+        });
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, c => {
+          const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+          };
+          return map[c] || c;
+        });
+      }
+
+      function makeSnippet(fullText, query) {
+        const lower = fullText.toLowerCase();
+        const q = query.toLowerCase();
+        const idx = lower.indexOf(q);
+        if (idx === -1) return '';
+        const radius = 40;
+        let start = Math.max(0, idx - radius);
+        let end = Math.min(fullText.length, idx + q.length + radius);
+        let snippet = fullText.slice(start, end).replace(/\s+/g, ' ');
+        if (start > 0) snippet = '...' + snippet;
+        if (end < fullText.length) snippet = snippet + '...';
+        return snippet;
+      }
+
+      function rebuildIndex() {
+        data = [];
+        const activePanel = document.querySelector('.panel.active');
+        if (!activePanel) return;
+        const sections = Array.from(activePanel.querySelectorAll('section.section'));
+        data = sections.map((sec, idx) => {
+          let id = sec.id;
+          if (!id) {
+            id = 'sec-' + (idx + 1) + '-' + (activePanel.id || 'panel');
+            sec.id = id;
+          }
+          const titleEl = sec.querySelector('h2');
+          const title = titleEl ? titleEl.textContent.trim() : 'Mục ' + (idx + 1);
+          const text = sec.textContent.toLowerCase();
+          return { id, title, text, element: sec };
+        });
+      }
+
+      function renderResults(query) {
+        resultsEl.innerHTML = '';
+        activeIndex = -1;
+
+        if (!query) {
+          currentResults = [];
+          return;
+        }
+
+        const q = query.toLowerCase();
+        currentResults = data.filter(sec => sec.text.includes(q));
+
+        if (currentResults.length === 0) {
+          resultsEl.innerHTML =
+            '<li class="search-result-empty">Không tìm thấy kết quả cho: <strong>' +
+            escapeHtml(query) +
+            '</strong> trong tab hiện tại.</li>';
+          return;
+        }
+
+        const itemsHtml = currentResults.map((sec, idx) => {
+          const snippet = makeSnippet(sec.text, q);
+          return `
+<li class="search-result-item" data-index="${idx}">
+  <div class="search-result-icon">⌕</div>
+  <div class="search-result-content">
+    <div class="search-result-title">${escapeHtml(sec.title)}</div>
+    <div class="search-result-snippet">${escapeHtml(snippet)}</div>
+  </div>
+</li>`;
+        }).join('');
+
+        resultsEl.innerHTML = itemsHtml;
+      }
+      const current = location.pathname.split("/").pop() || "Html.html";
+
+      const map = {
+        "Html.html": "tab-html",
+        "Css.html": "tab-css",
+        "Js.html": "tab-js",
+        "NodeJs.html": "tab-node",
+        "ReacjsTailwind.html": "tab-react"
+      };
+
+      const activeId = map[current];
+      if (!activeId) return;
+
+      const el = document.getElementById(activeId);
+      if (el) el.classList.add("active");
+      function scrollToResult(index) {
+        const item = currentResults[index];
+        if (!item) return;
+        clearHighlight();
+        item.element.classList.add('search-hit');
+        item.element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        resultsEl.innerHTML = '';
+        currentResults = [];
+        activeIndex = -1;
+      }
+
+      function doSearch() {
+        const q = input.value.trim();
+        if (!q) {
+          resultsEl.innerHTML = '';
+          currentResults = [];
+          activeIndex = -1;
+          clearHighlight();
+          return;
+        }
+        renderResults(q);
+      }
+
+      function updateActiveItem() {
+        const items = Array.from(resultsEl.querySelectorAll('.search-result-item'));
+        items.forEach((li, idx) => {
+          li.classList.toggle('is-active', idx === activeIndex);
+        });
+      }
+
+      btn.addEventListener('click', doSearch);
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          if (currentResults.length > 0 && activeIndex >= 0) {
+            e.preventDefault();
+            scrollToResult(activeIndex);
+          } else {
+            e.preventDefault();
+            doSearch();
+            if (currentResults.length === 1) {
+              scrollToResult(0);
+            }
+          }
+        } else if (e.key === 'ArrowDown') {
+          if (!currentResults.length) return;
+          e.preventDefault();
+          activeIndex = (activeIndex + 1) % currentResults.length;
+          updateActiveItem();
+        } else if (e.key === 'ArrowUp') {
+          if (!currentResults.length) return;
+          e.preventDefault();
+          activeIndex = (activeIndex - 1 + currentResults.length) % currentResults.length;
+          updateActiveItem();
+        }
+      });
+
+      resultsEl.addEventListener('click', function (e) {
+        const item = e.target.closest('.search-result-item');
+        if (!item) return;
+        const index = Number(item.dataset.index);
+        scrollToResult(index);
+      });
+
+      document.addEventListener('click', function (e) {
+        const wrapper = document.querySelector('.search-wrapper');
+        if (!wrapper.contains(e.target) && !resultsEl.contains(e.target)) {
+          resultsEl.innerHTML = '';
+          currentResults = [];
+          activeIndex = -1;
+        }
+      });
+
+      // Tabs
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          if (!targetId) return;
+
+          tabButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          panels.forEach(panel => {
+            panel.classList.toggle('active', panel.id === targetId);
+          });
+
+          // Reset search khi đổi tab
+          input.value = '';
+          resultsEl.innerHTML = '';
+          currentResults = [];
+          activeIndex = -1;
+          clearHighlight();
+
+          rebuildIndex();
+        });
+      });
+
+      // Khởi tạo index lần đầu cho tab React
+      rebuildIndex();
+    })();
+  </script>
+
+</body>
+
+</html>

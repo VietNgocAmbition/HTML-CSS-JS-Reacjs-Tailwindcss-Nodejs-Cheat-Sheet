@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>HTML Cheat Sheet</title>
+    <link rel="icon" type="image/png" href="logo2.png">
+
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-card: #020617;
+            --bg-soft: #0b1120;
+            --accent-pink: #f472b6;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-yellow: #eab308;
+            --accent-purple: #a855f7;
+            --accent-red: #fb7185;
+            --accent-orange: #fb923c;
+            --text-main: #e5e7eb;
+            --text-soft: #9ca3af;
+            --code-bg: #020617;
+            --border-soft: rgba(148, 163, 184, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.7;
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 16px 40px;
+            background: radial-gradient(circle at top left, #1e293b 0, #020617 60%);
+            color: var(--text-main);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-soft);
+            margin-bottom: 10px;
+            font-size: 0.96rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(236, 72, 153, 0.18));
+            margin-bottom: 10px;
+        }
+
+        .badge span {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent-green);
+        }
+
+        .section {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+        }
+
+        .sec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .pill {
+            width: 26px;
+            height: 26px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #020617;
+        }
+
+        .pill.structure {
+            background: var(--accent-blue);
+        }
+
+        .pill.text {
+            background: var(--accent-pink);
+        }
+
+        .pill.link {
+            background: var(--accent-orange);
+        }
+
+        .pill.list {
+            background: var(--accent-yellow);
+        }
+
+        .pill.table {
+            background: var(--accent-green);
+        }
+
+        .pill.form {
+            background: var(--accent-purple);
+        }
+
+        .pill.semantic {
+            background: #22d3ee;
+        }
+
+        .pill.media {
+            background: #facc15;
+        }
+
+        .pill.meta {
+            background: #22c55e;
+        }
+
+        .pill.other {
+            background: #fb7185;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--text-soft);
+        }
+
+        .tag-html {
+            border-color: rgba(248, 250, 252, 0.7);
+            color: #e5e7eb;
+        }
+
+        p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+        }
+
+        ul,
+        ol {
+            margin: 6px 0 8px 18px;
+            font-size: 0.94rem;
+        }
+
+        li+li {
+            margin-top: 3px;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 0.86rem;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            overflow-x: auto;
+            font-size: 0.86rem;
+            margin: 8px 0;
+        }
+
+        pre code {
+            border: none;
+            padding: 0;
+            background: transparent;
+        }
+
+        .sub-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 4px;
+            margin-bottom: 4px;
+            font-size: 0.94rem;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            margin-right: 6px;
+            margin-top: 4px;
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent-blue);
+        }
+
+        .chip.green .chip-dot {
+            background: var(--accent-green);
+        }
+
+        .chip.pink .chip-dot {
+            background: var(--accent-pink);
+        }
+
+        .chip.yellow .chip-dot {
+            background: var(--accent-yellow);
+        }
+
+        .chip.red .chip-dot {
+            background: var(--accent-red);
+        }
+
+        .important {
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 10px;
+            margin-top: 8px;
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0 12px 28px;
+            }
+        }
+
+        /* ===== Khung tìm kiếm ===== */
+
+        .search-wrapper {
+            position: sticky;
+            top: 50px;
+            z-index: 40;
+            max-width: 680px;
+            margin: 12px auto 18px;
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 999px;
+            padding: 6px 8px 6px 10px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+        }
+
+        .search-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-blue);
+        }
+
+        .search-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            padding: 4px 8px;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-soft);
+            opacity: 0.8;
+        }
+
+        .search-btn {
+            flex-shrink: 0;
+            border: none;
+            outline: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            background: linear-gradient(135deg,
+                    var(--accent-blue),
+                    var(--accent-pink));
+            color: #0b1120;
+            box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 9px 22px rgba(56, 189, 248, 0.55);
+            filter: brightness(1.05);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.8);
+        }
+
+        .search-hint {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            text-align: center;
+        }
+
+        .search-results {
+            margin-top: 6px;
+            padding: 4px 0;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            list-style: none;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .search-results:empty {
+            display: none;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+
+        .search-result-item:hover,
+        .search-result-item.is-active {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .search-result-icon {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--text-soft);
+            font-size: 0.65rem;
+        }
+
+        .search-result-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-result-title {
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-snippet {
+            color: var(--text-soft);
+            font-size: 0.78rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-empty {
+            padding: 6px 10px;
+            font-size: 0.86rem;
+            color: var(--text-soft);
+        }
+
+        .search-hit {
+            outline: 2px solid var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+            border-radius: 6px;
+            animation: searchBlink 1s ease-out 0s 1;
+        }
+
+        @keyframes searchBlink {
+            0% {
+                background-color: rgba(56, 189, 248, 0.22);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        /* ===== Khối ví dụ 3 phần: Giải thích – Code – Kết quả ===== */
+
+        .example {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(148, 163, 184, 0.6);
+        }
+
+        .example-title {
+            font-size: 0.96rem;
+            margin: 4px 0 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .example-title code {
+            border-radius: 4px;
+        }
+
+        .hot {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-red);
+            border: 1px solid rgba(251, 113, 133, 0.7);
+            border-radius: 999px;
+            padding: 1px 6px;
+            background: rgba(251, 113, 133, 0.12);
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .example-cell {
+            font-size: 0.9rem;
+        }
+
+        .example-cell h4 {
+            margin: 0 0 4px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-soft);
+        }
+
+        .example-output {
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            font-size: 0.88rem;
+        }
+
+        .example-output h1,
+        .example-output h2,
+        .example-output h3,
+        .example-output h4,
+        .example-output h5,
+        .example-output h6 {
+            margin: 0 0 4px;
+        }
+
+        .example-output table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.85rem;
+        }
+
+        .example-output th,
+        .example-output td {
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            padding: 4px 6px;
+        }
+
+        .example-output ul,
+        .example-output ol {
+            margin: 0 0 0 18px;
+        }
+
+        /* ===== MENU 5 FILE – STYLE GIỐNG TABS ===== */
+        /* ===== MENU 5 FILE – KHÔNG CÓ KHUNG NỀN ===== */
+        .top-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 18px;
+            padding: 0;
+            /* bỏ padding khung */
+            background: transparent;
+            /* bỏ nền */
+            border: none;
+            /* bỏ viền */
+            border-radius: 0;
+            /* bỏ bo góc khung */
+            backdrop-filter: none;
+            /* bỏ blur */
+            position: sticky;
+            top: 0;
+            z-index: 60;
+        }
+
+
+        /* Giống .tab-btn nhưng dùng class riêng để không conflict script tab React/Tailwind */
+        .top-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-soft);
+            font-size: 0.86rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition:
+                background 0.15s,
+                color 0.15s,
+                border-color 0.15s,
+                transform 0.1s,
+                box-shadow 0.15s;
+        }
+
+        .top-tab-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent-blue);
+        }
+
+        /* Hover */
+        .top-tab-btn:hover {
+            color: #e5e7eb;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Active = file hiện tại */
+        .top-tab-btn.active {
+            color: #0b1120;
+            border-color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            box-shadow: 0 10px 22px rgba(56, 189, 248, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .top-tab-btn.active .top-tab-dot {
+            background: #0b1120;
+        }
+         .author-links {
+  margin-bottom: 26px;   
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;       /* tăng khoảng cách để không dính chùm */
+  flex-wrap: wrap;
+}
+
+.author-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;       /* tách icon với chữ */
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.author-item:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Icon GitHub */
+.github-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-blue);
+}
+
+/* Icon tiền Donate */
+.money-icon {
+  width: 20px;
+  height: 20px;
+  color: #0b1120; /* icon sáng nổi */
+}
+
+/* Donate style */
+.donate-box {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: #0b1120;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.35);
+}
+    </style>
+</head>
+
+<body>
+
+    <h1>HTML Cheat Sheet</h1>
+    <p class="subtitle">
+        Những thứ dùng nhiều trong dự án lớn được đánh dấu <span style="color:#fb7185;font-weight:600;">màu đỏ
+        </span>.
+    </p>
+   <p class="subtitle">- Ikigai, Kaizen, Shu-Ha-Ri -</p>
+<div class="author-links">
+  <a href="https://github.com/VietNgocAmbition" target="_blank" class="author-item">
+    <svg class="github-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-4.3 1-4.3-2.5-6-3m12 5v-3.5c0-.9.1-1.3-.5-2 
+               2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 
+               4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C7 2.8 6 3 6 3 
+               a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.6 9.4c0 4.5 2.7 5.7 5.5 6 
+               -.3.4-.6 1.1-.7 2V21" />
+    </svg>
+    <span>GitHub: VietNgocAmbition</span>
+  </a>
+
+  <div class="author-item donate-box">
+    <svg class="money-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M2 10c2 0 3-2 3-2m17 2c-2 0-3-2-3-2m-14 6c2 0 3 2 3 2m14-2c-2 0-3 2-3 2"></path>
+    </svg>
+    <span>Donate: TPBank - 26304032004</span>
+  </div>
+</div>
+
+    <nav class="top-tabs">
+        <a href="Html.html" class="top-tab-btn" id="tab-html">
+            <span class="top-tab-dot"></span>
+            HTML
+        </a>
+        <a href="Css.html" class="top-tab-btn" id="tab-css">
+            <span class="top-tab-dot"></span>
+            CSS
+        </a>
+        <a href="Js.html" class="top-tab-btn" id="tab-js">
+            <span class="top-tab-dot"></span>
+            JavaScript
+        </a>
+        <a href="ReacjsTailwind.html" class="top-tab-btn" id="tab-react">
+            <span class="top-tab-dot"></span>
+            ReactJS & Tailwind
+        </a>
+        <a href="NodeJs.html" class="top-tab-btn" id="tab-node">
+            <span class="top-tab-dot"></span>
+            NodeJS
+        </a>
+
+    </nav>
+    <!-- Khung tìm kiếm + dropdown kết quả -->
+    <div class="search-wrapper">
+        <div class="search-bar">
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M10.5 4a6.5 6.5 0 0 1 5.11 10.57l3.91 3.91a1 1 0 0 1-1.42 1.42l-3.91-3.91A6.5 6.5 0 1 1 10.5 4zm0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z" />
+                </svg>
+            </span>
+            <input type="text" class="search-input"
+                placeholder="Tìm nhanh: &lt;form&gt;, table, meta, id/class, dialog...">
+            <button class="search-btn" type="button">
+                Tìm kiếm
+            </button>
+        </div>
+        <p class="search-hint">
+            Gõ từ khóa rồi nhấn <strong>Enter</strong> hoặc nút <strong>Tìm kiếm</strong>
+        </p>
+        <ul class="search-results"></ul>
+    </div>
+
+    <div class="badge"><span></span> HTML</div>
+
+    <!-- 1. Cấu trúc & khung chuẩn -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill structure">&lt;!&gt;</div>
+                <h2>1. Cấu trúc file HTML chuẩn</h2>
+            </div>
+            <span class="tag tag-html">Core Structure</span>
+        </div>
+
+        <p>Khung cơ bản của mọi trang HTML5.</p>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;!DOCTYPE html&gt;</code>,
+                <code>&lt;html&gt;</code>,
+                <code>&lt;head&gt;</code>,
+                <code>&lt;body&gt;</code>
+                <span class="hot">Dùng cực nhiều</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>1. Cú pháp & ý nghĩa</h4>
+                    <ul>
+                        <li><code>&lt;!DOCTYPE html&gt;</code>: khai báo dùng HTML5.</li>
+                        <li><code>&lt;html lang="vi"&gt;</code>: bao toàn bộ tài liệu, <code>lang</code> giúp SEO &
+                            screen
+                            reader.</li>
+                        <li><code>&lt;head&gt;</code>: chứa metadata, CSS, script, title...</li>
+                        <li><code>&lt;body&gt;</code>: tất cả nội dung hiển thị cho người dùng.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>2. Code ví dụ</h4>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="vi"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Trang demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Xin chào Viết Ngọc&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>3. Kết quả hiển thị</h4>
+                    <div class="example-output">
+                        <h1>Xin chào Viết Ngọc</h1>
+                        <p>(Title “Trang demo” sẽ hiện trên tab trình duyệt.)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">💡 99% dự án web đều bắt đầu bằng khung này. Sai <code>charset</code> hoặc
+            <code>viewport</code> là dễ lỗi tiếng Việt & responsive.
+        </p>
+    </section>
+
+    <!-- 2. Thẻ text -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill text">T</div>
+                <h2>2. Thẻ văn bản (block & inline)</h2>
+            </div>
+            <span class="tag tag-html">Text & Inline</span>
+        </div>
+
+        <div class="sub-title">2.1 Block-level: tiêu đề & đoạn văn</div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;h1&gt;...&lt;/h1&gt;</code> đến <code>&lt;h6&gt;...&lt;/h6&gt;</code>
+                <span class="hot">Heading – dùng rất nhiều</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Cấp tiêu đề từ quan trọng nhất (<code>h1</code>) đến nhỏ dần (<code>h6</code>).</li>
+                        <li>Mỗi trang lý tưởng chỉ có 1 <code>h1</code> (SEO tốt hơn).</li>
+                        <li>Dùng heading để chia chương, mục – không dùng để “phóng to chữ”.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;h1&gt;Trang học HTML&lt;/h1&gt;
+&lt;h2&gt;Mục 1: Cấu trúc&lt;/h2&gt;
+&lt;h3&gt;Phần nhỏ bên trong&lt;/h3&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <h1>Trang học HTML</h1>
+                        <h2>Mục 1: Cấu trúc</h2>
+                        <h3>Phần nhỏ bên trong</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>
+                <span class="hot">Khối/đoạn chữ core</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;p&gt;</code>: đoạn văn, tự cách dòng.</li>
+                        <li><code>&lt;div&gt;</code>: khối chứa chung (không mang nghĩa), dùng layout.</li>
+                        <li><code>&lt;span&gt;</code>: inline, dùng bọc vài chữ để style.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;p&gt;Đây là một đoạn văn.&lt;/p&gt;
+
+&lt;div&gt;
+  &lt;p&gt;Đoạn ở trong một &lt;span&gt;khối div&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Đây là một đoạn văn.</p>
+                        <div>
+                            <p>Đoạn ở trong một <span>khối div</span>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-title">2.2 Inline nhấn mạnh & định dạng nhỏ</div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;mark&gt;</code>
+                <span class="hot">Nhấn mạnh nội dung</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;strong&gt;</code>: nhấn mạnh <span style="color:#fb7185;">quan trọng</span>, in
+                            đậm.</li>
+                        <li><code>&lt;em&gt;</code>: nhấn mạnh, in nghiêng.</li>
+                        <li><code>&lt;mark&gt;</code>: highlight giống bút dạ.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;p&gt;
+  Đây là &lt;strong&gt;thông báo quan trọng&lt;/strong&gt;
+  và &lt;em&gt;chú ý đặc biệt&lt;/em&gt;,
+  phần này &lt;mark&gt;rất dễ sai&lt;/mark&gt;.
+&lt;/p&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>
+                            Đây là <strong>thông báo quan trọng</strong>
+                            và <em>chú ý đặc biệt</em>,
+                            phần này <mark>rất dễ sai</mark>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">💡 Dự án lớn: dùng <code>&lt;strong&gt;</code> và <code>&lt;em&gt;</code> chuẩn semantic giúp
+            SEO & accessibility tốt hơn là chỉ CSS.</p>
+    </section>
+
+    <!-- 3. Liên kết & ảnh -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill link">A</div>
+                <h2>3. Liên kết (link) & hình ảnh</h2>
+            </div>
+            <span class="tag tag-html">Links & Images</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;a&gt;</code> – Link điều hướng
+                <span class="hot">Cực kỳ hay gặp</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>href</code>: URL đích (có thể là ngoài, nội bộ, hoặc <code>#id</code>).</li>
+                        <li><code>target="_blank"</code>: mở tab mới.</li>
+                        <li><code>rel="noopener noreferrer"</code>: nên dùng kèm <code>_blank</code> (bảo mật).</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;a href="https://google.com"
+   target="_blank"
+   rel="noopener noreferrer"&gt;
+  Đi tới Google
+&lt;/a&gt;
+
+&lt;a href="#form-login"&gt;Nhảy tới form đăng nhập&lt;/a&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <a href="https://google.com" target="_blank" rel="noopener noreferrer">Đi tới Google</a>
+                        <br>
+                        <a href="#form-login">Nhảy tới form đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;img&gt;</code> – Hình ảnh
+                <span class="hot">Luôn phải có alt</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>src</code>: đường dẫn ảnh.</li>
+                        <li><code>alt</code>: mô tả ảnh, rất quan trọng cho SEO & screen reader.</li>
+                        <li>Không có thẻ đóng, tự kết thúc: <code>&lt;img ... /&gt;</code>.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;img src="avatar.jpg"
+     alt="Ảnh đại diện người dùng"&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>(Demo không có file ảnh thật, nên sẽ không hiển thị ảnh.)</p>
+                        <p>Nếu ảnh lỗi, trình duyệt sẽ hiện alt: “Ảnh đại diện người dùng”.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">💡 SPA, dashboard, landing page: link nội bộ thường đi cùng router (React Router, Next Link…)
+            nhưng về HTML gốc vẫn là <code>&lt;a&gt;</code>.</p>
+    </section>
+
+    <!-- 4. Danh sách -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill list">L</div>
+                <h2>4. Danh sách (list)</h2>
+            </div>
+            <span class="tag tag-html">ul / ol / dl</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>
+                <span class="hot">Menu, list item – dùng rất nhiều</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;ul&gt;</code>: danh sách không thứ tự (•).</li>
+                        <li><code>&lt;ol&gt;</code>: danh sách có thứ tự (1, 2, 3).</li>
+                        <li><code>&lt;li&gt;</code>: mỗi mục trong danh sách.</li>
+                        <li>Menu, sidebar, list sản phẩm… thường dùng <code>&lt;ul&gt;</code> + CSS.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Bước 1: Chuẩn bị&lt;/li&gt;
+  &lt;li&gt;Bước 2: Thực hiện&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <ol>
+                            <li>Bước 1: Chuẩn bị</li>
+                            <li>Bước 2: Thực hiện</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;dd&gt;</code>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Danh sách mô tả (description list).</li>
+                        <li><code>&lt;dt&gt;</code>: term (tên), <code>&lt;dd&gt;</code>: description (mô tả).</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Ngôn ngữ đánh dấu cấu trúc trang web.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <dl>
+                            <dt>HTML</dt>
+                            <dd>Ngôn ngữ đánh dấu cấu trúc trang web.</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 5. Bảng -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill.table pill">Tb</div>
+                <h2>5. Bảng (table) cơ bản</h2>
+            </div>
+            <span class="tag tag-html">Table</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
+                <span class="hot">Dùng cho dữ liệu dạng lưới</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;table&gt;</code>: khung bảng.</li>
+                        <li><code>&lt;tr&gt;</code>: 1 dòng.</li>
+                        <li><code>&lt;th&gt;</code>: ô tiêu đề (in đậm, canh giữa).</li>
+                        <li><code>&lt;td&gt;</code>: ô dữ liệu.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Tên&lt;/th&gt;
+    &lt;th&gt;Tuổi&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Ngọc&lt;/td&gt;
+    &lt;td&gt;21&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <table>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Tuổi</th>
+                            </tr>
+                            <tr>
+                                <td>Ngọc</td>
+                                <td>21</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">💡 Dashboard, admin panel thường dùng table + thư viện (DataTables, AG Grid...) chứ ít code
+            bảng “thuần” HTML, nhưng hiểu table gốc vẫn là bắt buộc.</p>
+    </section>
+
+    <!-- 6. Form -->
+    <section class="section" id="form-login">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill form">F</div>
+                <h2>6. Form & input – những thứ dùng nhiều nhất</h2>
+            </div>
+            <span class="tag tag-html">Forms</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;form&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;input&gt;</code>
+                <span class="hot">Đăng nhập / đăng ký / tìm kiếm</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;form&gt;</code>: bao toàn bộ input, có <code>action</code>, <code>method</code>.
+                        </li>
+                        <li><code>&lt;label for="id"&gt;</code>: click label sẽ focus vào input có id tương ứng.</li>
+                        <li><code>&lt;input&gt;</code>: nhiều kiểu (text, password, email...).</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;form action="/login" method="POST"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" name="email"
+         type="email"
+         placeholder="Nhập email"
+         required&gt;
+
+  &lt;label for="pass"&gt;Mật khẩu&lt;/label&gt;
+  &lt;input id="pass" name="password"
+         type="password"
+         required&gt;
+
+  &lt;button type="submit"&gt;Đăng nhập&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <form>
+                            <label for="email-demo">Email</label><br>
+                            <input id="email-demo" name="email" type="email" placeholder="Nhập email"><br><br>
+                            <label for="pass-demo">Mật khẩu</label><br>
+                            <input id="pass-demo" name="password" type="password"><br><br>
+                            <button type="submit">Đăng nhập</button>
+                        </form>
+                        <p style="font-size:0.8rem; color:#9ca3af; margin-top:6px;">
+                            (Demo này không gửi dữ liệu thật, chỉ để xem giao diện.)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;option&gt;</code>
+                <span class="hot">Form nâng cao</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;textarea&gt;</code>: nhập nội dung dài.</li>
+                        <li><code>&lt;select&gt;</code> + <code>&lt;option&gt;</code>: dropdown.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;label for="city"&gt;Thành phố&lt;/label&gt;
+&lt;select id="city" name="city"&gt;
+  &lt;option value="dn"&gt;Đà Nẵng&lt;/option&gt;
+  &lt;option value="hcm"&gt;Hồ Chí Minh&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;label for="msg"&gt;Ghi chú&lt;/label&gt;
+&lt;textarea id="msg" name="message"
+          rows="3"&gt;&lt;/textarea&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <label for="city-demo">Thành phố</label><br>
+                        <select id="city-demo" name="city">
+                            <option value="dn">Đà Nẵng</option>
+                            <option value="hcm">Hồ Chí Minh</option>
+                        </select>
+                        <br><br>
+                        <label for="msg-demo">Ghi chú</label><br>
+                        <textarea id="msg-demo" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 7. Semantic layout -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill semantic">S</div>
+                <h2>7. Thẻ semantic & bố cục trang</h2>
+            </div>
+            <span class="tag tag-html">Semantic Layout</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>,
+                <code>&lt;footer&gt;</code>
+                <span class="hot">Layout chuẩn – nên dùng</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;header&gt;</code>: phần đầu trang (logo, menu).</li>
+                        <li><code>&lt;nav&gt;</code>: chứa link điều hướng.</li>
+                        <li><code>&lt;main&gt;</code>: nội dung chính, 1 trang chỉ nên có 1.</li>
+                        <li><code>&lt;footer&gt;</code>: chân trang (copyright, link phụ...).</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;header&gt;
+  &lt;h1&gt;Tên website&lt;/h1&gt;
+  &lt;nav&gt;
+    &lt;a href="#home"&gt;Trang chủ&lt;/a&gt;
+    &lt;a href="#blog"&gt;Blog&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section id="home"&gt;Nội dung chính&lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;© 2025 VietNgoc&lt;/footer&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <header>
+                            <h2>Tên website</h2>
+                            <nav>
+                                <a href="#home">Trang chủ</a> |
+                                <a href="#blog">Blog</a>
+                            </nav>
+                        </header>
+                        <main>
+                            <section id="home">Nội dung chính</section>
+                        </main>
+                        <footer>© 2025 VietNgoc</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 8. Media -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill media">M</div>
+                <h2>8. Media: audio, video, iframe</h2>
+            </div>
+            <span class="tag tag-html">Media</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>controls</code>: hiển thị nút play/pause.</li>
+                        <li><code>poster</code> (video): ảnh thumbnail.</li>
+                        <li>Dùng <code>&lt;source&gt;</code> để cung cấp nhiều định dạng.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;audio controls&gt;
+  &lt;source src="music.mp3" type="audio/mpeg"&gt;
+  Trình duyệt không hỗ trợ audio.
+&lt;/audio&gt;
+
+&lt;video controls width="320"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  Trình duyệt không hỗ trợ video.
+&lt;/video&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>(Không có file media thật nên player sẽ trống, nhưng giao diện nút vẫn hiện.)</p>
+                        <audio controls style="width:100%;">
+                            <source src="music.mp3" type="audio/mpeg">
+                            Trình duyệt không hỗ trợ audio.
+                        </audio>
+                        <br><br>
+                        <video controls width="260">
+                            <source src="video.mp4" type="video/mp4">
+                            Trình duyệt không hỗ trợ video.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;iframe&gt;</code> – nhúng YouTube, bản đồ, trang khác
+                <span class="hot">Dùng khá nhiều</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>src</code>: URL trang nhúng.</li>
+                        <li>Hay dùng để nhúng YouTube, Google Maps…</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;iframe
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  width="560" height="315"
+  title="YouTube video"
+  allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Demo: iframe trống (không có VIDEO_ID thật).</p>
+                        <iframe src="about:blank" width="260" height="140" title="Demo iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 9. Meta, SEO, favicon -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill meta">Me</div>
+                <h2>9. Thẻ meta, SEO cơ bản & favicon</h2>
+            </div>
+            <span class="tag tag-html">Meta & SEO</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;meta&gt;</code> cơ bản
+                <span class="hot">Dự án production bắt buộc có</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>charset="UTF-8"</code>: mã hóa tiếng Việt.</li>
+                        <li><code>viewport</code>: responsive trên mobile.</li>
+                        <li><code>description</code>: mô tả trang (hiện trên Google).</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta name="description"
+        content="Sổ tay HTML cho frontend dev"&gt;
+  &lt;title&gt;HTML Cheat Sheet&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Không hiển thị trực tiếp trên trang, nhưng:</p>
+                        <ul>
+                            <li>Title: hiện trên tab trình duyệt.</li>
+                            <li>Description: hiện trong kết quả tìm kiếm.</li>
+                            <li>Viewport: giúp trang hiển thị đúng trên mobile.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                Open Graph khi share Facebook/Zalo
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <p>Dùng để định nghĩa: title, description, hình ảnh khi share link lên mạng xã hội.</p>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;meta property="og:title"
+      content="Sổ tay HTML VietNgoc"&gt;
+&lt;meta property="og:description"
+      content="Tổng hợp gần như full kiến thức HTML hay dùng"&gt;
+&lt;meta property="og:image"
+      content="https://domain.com/og-image.jpg"&gt;
+&lt;meta property="og:url"
+      content="https://domain.com/html-cheat-sheet"&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Khi bạn share link trang này, Facebook/Zalo sẽ đọc các thẻ <code>og:</code> để hiển thị
+                            preview đẹp hơn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 10. Script, link, comment, entity -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill other">++</div>
+                <h2>10. Thẻ khác hay gặp: link, script, comment, entity</h2>
+            </div>
+            <span class="tag tag-html">Others</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;link&gt;</code> – nối file CSS, font, icon
+                <span class="hot">Dùng mọi dự án</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>rel="stylesheet"</code>: nhúng file CSS.</li>
+                        <li><code>rel="icon"</code>: favicon.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;link rel="icon" href="favicon.ico"&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Trang sẽ tải file <code>style.css</code> để style, và favicon hiện trên tab trình duyệt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;script&gt;</code> – nhúng JavaScript
+                <span class="hot">Dùng với mọi SPA, web app</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;script src="app.js"&gt;&lt;/script&gt;</code>: nhúng file JS.</li>
+                        <li><code>&lt;script&gt;...&lt;/script&gt;</code>: viết JS inline.</li>
+                        <li>Dự án lớn: thường dùng bundler (Vite, Webpack) generate script.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;script&gt;
+  console.log("Hello HTML");
+&lt;/script&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Chuỗi <code>"Hello HTML"</code> sẽ xuất hiện trong console trình duyệt (F12 → Console).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                Comment & entity: <code>&lt;!-- --&gt;</code>, <code>&amp;amp;</code>, <code>&amp;lt;</code>, ...
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Comment: không hiển thị trên trang.</li>
+                        <li>Entity: dùng để hiển thị ký tự đặc biệt, như <code>&lt;</code>, <code>&gt;</code>,
+                            <code>&amp;</code>.
+                        </li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;!-- Đây là comment --&gt;
+&lt;p&gt;Dùng &amp;amp; để hiện dấu &amp;&lt;/p&gt;
+&lt;p&gt;Dùng &amp;lt; và &amp;gt; để hiện &lt; &gt;&lt;/p&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Dùng &amp; để hiện dấu &</p>
+                        <p>Dùng &lt; và &gt; để hiện &lt; &gt;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Thuộc tính global: id, class, title, data-* -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill other">G</div>
+                <h2>11. Thuộc tính global: id, class, title, data-*</h2>
+            </div>
+            <span class="tag tag-html">Global attributes</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>id</code>, <code>class</code>, <code>title</code>, <code>data-*</code>
+                <span class="hot">Gắn hook cho CSS / JS</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>id</code>: duy nhất trên trang (dùng với <code>#id</code>, JS, link nội bộ).</li>
+                        <li><code>class</code>: nhóm nhiều phần tử, dùng cho CSS & JS.</li>
+                        <li><code>title</code>: tooltip khi hover.</li>
+                        <li><code>data-*</code>: gắn dữ liệu custom cho JS đọc.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;div id="hero" class="box primary"
+     title="Đây là hero section"
+     data-track="hero-section"&gt;
+  &lt;h2&gt;Xin chào&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <div id="hero-demo" class="box primary" title="Đây là hero section" data-track="hero-section">
+                            <h3>Xin chào</h3>
+                        </div>
+                        <p style="font-size:0.8rem;color:#9ca3af;">
+                            (Hover vào khối “Xin chào” sẽ thấy tooltip.)
+                            CSS/JS sẽ thường bắt theo <code>#hero-demo</code> hoặc <code>.primary</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Form nâng cao: validation & trạng thái -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill form">V</div>
+                <h2>12. Form nâng cao: validation & trạng thái</h2>
+            </div>
+            <span class="tag tag-html">Form Advanced</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>required</code>, <code>min</code>, <code>max</code>, <code>pattern</code>, <code>disabled</code>,
+                <code>readonly</code>
+                <span class="hot">Form real project</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>required</code>: bắt buộc nhập.</li>
+                        <li><code>min</code>, <code>max</code>: giới hạn số / ngày.</li>
+                        <li><code>pattern</code>: regex kiểm tra input.</li>
+                        <li><code>disabled</code>: không cho sửa & không submit.</li>
+                        <li><code>readonly</code>: không cho sửa nhưng vẫn submit.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;form&gt;
+  &lt;label&gt;Tuổi (18-60)&lt;/label&gt;
+  &lt;input type="number" min="18" max="60" required&gt;
+
+  &lt;label&gt;SĐT (10 số)&lt;/label&gt;
+  &lt;input type="tel"
+         pattern="[0-9]{10}"
+         placeholder="Ví dụ: 0912345678"&gt;
+
+  &lt;input type="text" value="Không sửa được"
+         readonly&gt;
+
+  &lt;input type="text" value="Đang khóa"
+         disabled&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <form onsubmit="return false;">
+                            <label>Tuổi (18-60)</label><br>
+                            <input type="number" min="18" max="60" required><br><br>
+
+                            <label>SĐT (10 số)</label><br>
+                            <input type="tel" pattern="[0-9]{10}" placeholder="Ví dụ: 0912345678"><br><br>
+
+                            <input type="text" value="Không sửa được" readonly><br><br>
+                            <input type="text" value="Đang khóa" disabled>
+                        </form>
+                        <p style="font-size:0.8rem;color:#9ca3af;">
+                            Trình duyệt tự chặn submit nếu input required/number không hợp lệ → đỡ phải code JS basic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 13. Responsive image: picture, source -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill media">R</div>
+                <h2>13. Ảnh responsive: &lt;picture&gt; & &lt;source&gt;</h2>
+            </div>
+            <span class="tag tag-html">Responsive Image</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;picture&gt;</code>, <code>&lt;source&gt;</code>, <code>&lt;img&gt;</code>
+                <span class="hot">Landing page, performance</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Cho phép chọn ảnh khác nhau cho mobile / desktop.</li>
+                        <li>Giảm dung lượng tải cho mobile.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 600px)"
+          srcset="banner-mobile.jpg"&gt;
+  &lt;source media="(min-width: 601px)"
+          srcset="banner-desktop.jpg"&gt;
+  &lt;img src="banner-desktop.jpg"
+       alt="Banner giới thiệu sản phẩm"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Demo này không có ảnh thật, nhưng trên thực tế:</p>
+                        <ul>
+                            <li>Màn hình nhỏ: trình duyệt chọn <code>banner-mobile.jpg</code>.</li>
+                            <li>Màn hình lớn: chọn <code>banner-desktop.jpg</code>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 14. details / summary / dialog -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill semantic">D</div>
+                <h2>14. details, summary, dialog – mở rộng UI bằng HTML thuần</h2>
+            </div>
+            <span class="tag tag-html">details / dialog</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code>
+                <span class="hot">FAQ, collapsible</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Tạo khối có thể mở/đóng mà không cần JS.</li>
+                        <li>Hay dùng cho FAQ hoặc “Xem thêm”.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;details&gt;
+  &lt;summary&gt;HTML là gì?&lt;/summary&gt;
+  &lt;p&gt;HTML là ngôn ngữ đánh dấu
+     dùng để xây dựng cấu trúc trang web.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <details>
+                            <summary>HTML là gì?</summary>
+                            <p>HTML là ngôn ngữ đánh dấu dùng để xây dựng cấu trúc trang web.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;dialog&gt;</code> – modal HTML5 (hỗ trợ khá tốt)
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Cho phép tạo hộp thoại modal native.</li>
+                        <li>Cần chút JS để mở/đóng.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ (rút gọn)</h4>
+                    <pre><code>&lt;button onclick="myDialog.showModal()"&gt;
+  Mở dialog
+&lt;/button&gt;
+
+&lt;dialog id="myDialog"&gt;
+  &lt;p&gt;Xin chào từ dialog&lt;/p&gt;
+  &lt;button onclick="myDialog.close()"&gt;Đóng&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả (demo tĩnh)</h4>
+                    <div class="example-output">
+                        <p>Trình duyệt modern sẽ hỗ trợ <code>&lt;dialog&gt;</code>; trong SPA thực tế hay dùng kèm
+                            framework.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. template & root cho SPA -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill other">SPA</div>
+                <h2>15. &lt;template&gt;, &lt;noscript&gt;, div#root – nền cho React/Vue</h2>
+            </div>
+            <span class="tag tag-html">SPA & Components</span>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;div id="root"&gt;</code>, <code>&lt;noscript&gt;</code>
+                <span class="hot">Mọi app React/Vue</span>
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li><code>&lt;div id="root"&gt;</code>: nơi framework mount UI (ReactDOM.render).</li>
+                        <li><code>&lt;noscript&gt;</code>: nội dung hiện nếu user tắt JS.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ</h4>
+                    <pre><code>&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+
+  &lt;noscript&gt;
+    Vui lòng bật JavaScript để dùng ứng dụng này.
+  &lt;/noscript&gt;
+
+  &lt;script src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>React/Vue sẽ render toàn bộ app vào <code>#root</code>.
+                            Nếu JS bị tắt → dòng trong <code>&lt;noscript&gt;</code> sẽ xuất hiện.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">
+                <code>&lt;template&gt;</code> – khung HTML không render trực tiếp
+            </div>
+            <div class="example-grid">
+                <div class="example-cell">
+                    <h4>Giải thích</h4>
+                    <ul>
+                        <li>Nội dung trong <code>&lt;template&gt;</code> không hiển thị ngay.</li>
+                        <li>Thường được JS clone ra để render nhiều lần.</li>
+                    </ul>
+                </div>
+                <div class="example-cell">
+                    <h4>Code ví dụ (ý tưởng)</h4>
+                    <pre><code>&lt;template id="item-template"&gt;
+  &lt;li class="todo-item"&gt;&lt;/li&gt;
+&lt;/template&gt;
+
+&lt;ul id="todo-list"&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+// JS sẽ clone template và gắn text vào
+&lt;/script&gt;</code></pre>
+                </div>
+                <div class="example-cell">
+                    <h4>Kết quả</h4>
+                    <div class="example-output">
+                        <p>Không thấy gì nếu không có JS.
+                            Dùng nhiều trong web component/custom elements & pattern render thủ công.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="important">
+            ✅ 15 chương trên bao phủ gần như toàn bộ HTML bạn sẽ đụng khi làm:
+            từ layout, text, form, media, meta, id/class, cho tới nền tảng SPA & UI nâng cao.
+            Cần gì đặc biệt hơn (canvas, svg, web component full, v.v.) thì tra thêm theo keyword tương ứng.
+        </div>
+    </section>
+
+
+
+</body>
+<script>
+    (function () {
+        const input = document.querySelector('.search-input');
+        const btn = document.querySelector('.search-btn');
+        const resultsEl = document.querySelector('.search-results');
+        const current = location.pathname.split("/").pop() || "Html.html";
+
+        const map = {
+            "Html.html": "tab-html",
+            "Css.html": "tab-css",
+            "Js.html": "tab-js",
+            "NodeJs.html": "tab-node",
+            "ReacjsTailwind.html": "tab-react"
+        };
+
+        const activeId = map[current];
+        if (activeId) {
+            const el = document.getElementById(activeId);
+            if (el) el.classList.add("active");
+        }
+        if (!input || !btn || !resultsEl) return;
+
+        // Thu thập dữ liệu các section (mỗi section là 1 "mục kiến thức")
+        const sections = Array.from(document.querySelectorAll('section.section'));
+        const data = sections.map((sec, idx) => {
+            let id = sec.id;
+            if (!id) {
+                id = 'sec-' + (idx + 1);
+                sec.id = id;
+            }
+            const titleEl = sec.querySelector('h2');
+            const title = titleEl ? titleEl.textContent.trim() : 'Mục ' + (idx + 1);
+            const text = sec.textContent.toLowerCase();
+            return { id, title, text, element: sec };
+        });
+
+        let currentResults = [];
+        let activeIndex = -1;
+
+        function clearHighlight() {
+            document.querySelectorAll('.search-hit').forEach(el => {
+                el.classList.remove('search-hit');
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, c => {
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return map[c] || c;
+            });
+        }
+
+        function makeSnippet(fullText, query) {
+            const lower = fullText.toLowerCase();
+            const q = query.toLowerCase();
+            const idx = lower.indexOf(q);
+            if (idx === -1) return '';
+            const radius = 40;
+            let start = Math.max(0, idx - radius);
+            let end = Math.min(fullText.length, idx + q.length + radius);
+            let snippet = fullText.slice(start, end).replace(/\s+/g, ' ');
+            if (start > 0) snippet = '...' + snippet;
+            if (end < fullText.length) snippet = snippet + '...';
+            return snippet;
+        }
+
+        function renderResults(query) {
+            resultsEl.innerHTML = '';
+            activeIndex = -1;
+
+            if (!query) {
+                return;
+            }
+
+            const q = query.toLowerCase();
+            currentResults = data.filter(sec => sec.text.includes(q));
+
+            if (currentResults.length === 0) {
+                resultsEl.innerHTML =
+                    '<li class="search-result-empty">Không tìm thấy kết quả cho: <strong>' +
+                    escapeHtml(query) +
+                    '</strong></li>';
+                return;
+            }
+
+            const itemsHtml = currentResults.map((sec, idx) => {
+                const snippet = makeSnippet(sec.text, q);
+                return `
+<li class="search-result-item" data-index="${idx}">
+    <div class="search-result-icon">⌕</div>
+    <div class="search-result-content">
+        <div class="search-result-title">${escapeHtml(sec.title)}</div>
+        <div class="search-result-snippet">${escapeHtml(snippet)}</div>
+    </div>
+</li>`;
+            }).join('');
+
+            resultsEl.innerHTML = itemsHtml;
+        }
+
+        function scrollToResult(index) {
+            const item = currentResults[index];
+            if (!item) return;
+            clearHighlight();
+            item.element.classList.add('search-hit');
+            item.element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            resultsEl.innerHTML = '';
+        }
+
+        function doSearch() {
+            const q = input.value.trim();
+            if (!q) {
+                resultsEl.innerHTML = '';
+                currentResults = [];
+                activeIndex = -1;
+                return;
+            }
+            renderResults(q);
+        }
+
+        function updateActiveItem() {
+            const items = Array.from(resultsEl.querySelectorAll('.search-result-item'));
+            items.forEach((li, idx) => {
+                li.classList.toggle('is-active', idx === activeIndex);
+            });
+        }
+
+        btn.addEventListener('click', doSearch);
+
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                if (currentResults.length > 0 && activeIndex >= 0) {
+                    e.preventDefault();
+                    scrollToResult(activeIndex);
+                } else {
+                    e.preventDefault();
+                    doSearch();
+                }
+            } else if (e.key === 'ArrowDown') {
+                if (!currentResults.length) return;
+                e.preventDefault();
+                activeIndex = (activeIndex + 1) % currentResults.length;
+                updateActiveItem();
+            } else if (e.key === 'ArrowUp') {
+                if (!currentResults.length) return;
+                e.preventDefault();
+                activeIndex = (activeIndex - 1 + currentResults.length) % currentResults.length;
+                updateActiveItem();
+            }
+        });
+
+        resultsEl.addEventListener('click', function (e) {
+            const item = e.target.closest('.search-result-item');
+            if (!item) return;
+            const index = Number(item.dataset.index);
+            scrollToResult(index);
+        });
+
+        document.addEventListener('click', function (e) {
+            const wrapper = document.querySelector('.search-wrapper');
+            if (!wrapper.contains(e.target)) {
+                resultsEl.innerHTML = '';
+                currentResults = [];
+                activeIndex = -1;
+            }
+        });
+    })();
+</script>
+
+</html>

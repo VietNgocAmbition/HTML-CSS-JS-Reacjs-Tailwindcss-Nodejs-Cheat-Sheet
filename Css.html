@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>CSS Cheat Sheet</title>
+    <link rel="icon" type="image/png" href="logo2.png">
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-card: #020617;
+            --bg-soft: #0b1120;
+            --accent-pink: #f472b6;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-yellow: #eab308;
+            --accent-purple: #a855f7;
+            --accent-red: #fb7185;
+            --accent-orange: #fb923c;
+            --text-main: #e5e7eb;
+            --text-soft: #9ca3af;
+            --code-bg: #020617;
+            --border-soft: rgba(148, 163, 184, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.7;
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 16px 40px;
+            background: radial-gradient(circle at top left, #1e293b 0, #020617 60%);
+            color: var(--text-main);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-soft);
+            margin-bottom: 10px;
+            font-size: 0.96rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(236, 72, 153, 0.18));
+            margin-bottom: 10px;
+        }
+ .author-links {
+  margin-bottom: 26px;   
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;       /* tăng khoảng cách để không dính chùm */
+  flex-wrap: wrap;
+}
+
+.author-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;       /* tách icon với chữ */
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.author-item:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Icon GitHub */
+.github-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-blue);
+}
+
+/* Icon tiền Donate */
+.money-icon {
+  width: 20px;
+  height: 20px;
+  color: #0b1120; /* icon sáng nổi */
+}
+
+/* Donate style */
+.donate-box {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: #0b1120;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.35);
+}
+        .badge span {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent-green);
+        }
+
+        .section {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+        }
+
+        .section.hot {
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .sec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .pill {
+            width: 26px;
+            height: 26px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #020617;
+        }
+
+        .pill.basic {
+            background: var(--accent-blue);
+        }
+
+        .pill.selector {
+            background: var(--accent-pink);
+        }
+
+        .pill.box {
+            background: var(--accent-orange);
+        }
+
+        .pill.typography {
+            background: var(--accent-yellow);
+        }
+
+        .pill.color {
+            background: var(--accent-green);
+        }
+
+        .pill.layout {
+            background: var(--accent-purple);
+        }
+
+        .pill.flex {
+            background: #22c55e;
+        }
+
+        .pill.grid {
+            background: #f97316;
+        }
+
+        .pill.effect {
+            background: #a855f7;
+        }
+
+        .pill.responsive {
+            background: #facc15;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--text-soft);
+        }
+
+        .tag-css {
+            border-color: rgba(248, 250, 252, 0.7);
+            color: #e5e7eb;
+        }
+
+        .tag-hot {
+            border-color: rgba(248, 113, 113, 0.9);
+            color: #fecaca;
+            background: rgba(248, 113, 113, 0.08);
+        }
+
+        p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+        }
+
+        ul,
+        ol {
+            margin: 6px 0 8px 18px;
+            font-size: 0.94rem;
+        }
+
+        li+li {
+            margin-top: 3px;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 0.86rem;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            overflow-x: auto;
+            font-size: 0.86rem;
+            margin: 8px 0;
+        }
+
+        pre code {
+            border: none;
+            padding: 0;
+            background: transparent;
+        }
+
+        .sub-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 4px;
+            margin-bottom: 4px;
+            font-size: 0.94rem;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
+        }
+
+        .demo-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .demo-label {
+            font-size: 0.82rem;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .demo-box {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 10px 12px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .demo-preview {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 10px 12px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            margin-right: 6px;
+            margin-top: 4px;
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent-blue);
+        }
+
+        .chip.green .chip-dot {
+            background: var(--accent-green);
+        }
+
+        .chip.pink .chip-dot {
+            background: var(--accent-pink);
+        }
+
+        .chip.yellow .chip-dot {
+            background: var(--accent-yellow);
+        }
+
+        .chip.red .chip-dot {
+            background: var(--accent-red);
+        }
+
+        .important {
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 10px;
+            margin-top: 8px;
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        .important.hot {
+            border-left-color: var(--accent-red);
+            color: #fecaca;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0 12px 28px;
+            }
+
+            .demo-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Khung tìm kiếm dùng chung ===== */
+
+        .search-wrapper {
+            position: sticky;
+            top: 50px;
+            z-index: 40;
+            max-width: 680px;
+            margin: 12px auto 18px;
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 999px;
+            padding: 6px 8px 6px 10px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+        }
+
+        .search-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-blue);
+        }
+
+        .search-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            padding: 4px 8px;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-soft);
+            opacity: 0.8;
+        }
+
+        .search-btn {
+            flex-shrink: 0;
+            border: none;
+            outline: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            background: linear-gradient(135deg,
+                    var(--accent-blue),
+                    var(--accent-pink));
+            color: #0b1120;
+            box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 9px 22px rgba(56, 189, 248, 0.55);
+            filter: brightness(1.05);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.8);
+        }
+
+        .search-hint {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            text-align: center;
+        }
+
+        /* ===== Dropdown kết quả giống kiểu YouTube ===== */
+
+        .search-results {
+            margin-top: 6px;
+            padding: 4px 0;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            list-style: none;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .search-results:empty {
+            display: none;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+
+        .search-result-item:hover,
+        .search-result-item.is-active {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .search-result-icon {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--text-soft);
+            font-size: 0.65rem;
+        }
+
+        .search-result-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-result-title {
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-snippet {
+            color: var(--text-soft);
+            font-size: 0.78rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-empty {
+            padding: 6px 10px;
+            font-size: 0.86rem;
+            color: var(--text-soft);
+        }
+
+        /* ===== Highlight kết quả khi cuộn xuống ===== */
+
+        .search-hit {
+            outline: 2px solid var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+            border-radius: 6px;
+            animation: searchBlink 1s ease-out 0s 1;
+        }
+
+        @keyframes searchBlink {
+            0% {
+                background-color: rgba(56, 189, 248, 0.22);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        /* ===== Một số class demo để preview CSS ===== */
+
+        .demo-text-large {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .demo-text-center {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .demo-box-padding {
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 8px;
+        }
+
+        .demo-flex-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .demo-flex-item {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.6);
+            font-size: 0.85rem;
+        }
+
+        .demo-btn {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #022c22;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        .demo-btn:hover {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+        }
+
+        .demo-box-border {
+            border-radius: 12px;
+            border: 2px solid #38bdf8;
+            padding: 8px 10px;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .demo-grid-item {
+            padding: 6px 0;
+            text-align: center;
+            border-radius: 8px;
+            background: rgba(248, 113, 113, 0.15);
+            font-size: 0.8rem;
+        }
+
+        .demo-badge-hot {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.8);
+            color: #fecaca;
+        }
+
+        .top-nav {
+            display: flex;
+            gap: 20px;
+            padding: 14px 24px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .top-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.25s ease;
+        }
+
+        .top-nav a:hover {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        /* Màu ACTIVE (trang hiện tại) */
+        .top-nav a.active {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.45);
+        }
+
+        /* ===== MENU 5 FILE – STYLE GIỐNG TABS ===== */
+        .top-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 18px;
+            padding: 0;
+            /* bỏ padding khung */
+            background: transparent;
+            /* bỏ nền */
+            border: none;
+            /* bỏ viền */
+            border-radius: 0;
+            /* bỏ bo góc khung */
+            backdrop-filter: none;
+            /* bỏ blur */
+            position: sticky;
+            top: 0;
+            z-index: 60;
+        }
+
+        /* Giống .tab-btn nhưng dùng class riêng để không conflict script tab React/Tailwind */
+        .top-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-soft);
+            font-size: 0.86rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition:
+                background 0.15s,
+                color 0.15s,
+                border-color 0.15s,
+                transform 0.1s,
+                box-shadow 0.15s;
+        }
+
+        .top-tab-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent-blue);
+        }
+
+        /* Hover */
+        .top-tab-btn:hover {
+            color: #e5e7eb;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Active = file hiện tại */
+        .top-tab-btn.active {
+            color: #0b1120;
+            border-color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            box-shadow: 0 10px 22px rgba(56, 189, 248, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .top-tab-btn.active .top-tab-dot {
+            background: #0b1120;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Cheat Sheet</h1>
+    <p class="subtitle">Từ selector, box model, layout (flex, grid, position), màu sắc, text, tới animation, biến,
+        media query...</p>
+     <p class="subtitle">- Ikigai, Kaizen, Shu-Ha-Ri -</p>
+<div class="author-links">
+  <a href="https://github.com/VietNgocAmbition" target="_blank" class="author-item">
+    <svg class="github-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-4.3 1-4.3-2.5-6-3m12 5v-3.5c0-.9.1-1.3-.5-2 
+               2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 
+               4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C7 2.8 6 3 6 3 
+               a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.6 9.4c0 4.5 2.7 5.7 5.5 6 
+               -.3.4-.6 1.1-.7 2V21" />
+    </svg>
+    <span>GitHub: VietNgocAmbition</span>
+  </a>
+
+  <div class="author-item donate-box">
+    <svg class="money-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M2 10c2 0 3-2 3-2m17 2c-2 0-3-2-3-2m-14 6c2 0 3 2 3 2m14-2c-2 0-3 2-3 2"></path>
+    </svg>
+    <span>Donate: TPBank - 26304032004</span>
+  </div>
+</div>
+
+    <nav class="top-tabs">
+        <a href="Html.html" class="top-tab-btn" id="tab-html">
+            <span class="top-tab-dot"></span>
+            HTML
+        </a>
+        <a href="Css.html" class="top-tab-btn" id="tab-css">
+            <span class="top-tab-dot"></span>
+            CSS
+        </a>
+        <a href="Js.html" class="top-tab-btn" id="tab-js">
+            <span class="top-tab-dot"></span>
+            JavaScript
+        </a>
+        <a href="ReacjsTailwind.html" class="top-tab-btn" id="tab-react">
+            <span class="top-tab-dot"></span>
+            ReactJS & Tailwind
+        </a>
+        <a href="NodeJs.html" class="top-tab-btn" id="tab-node">
+            <span class="top-tab-dot"></span>
+            NodeJS
+        </a>
+
+    </nav>
+    <!-- Khung tìm kiếm + dropdown kết quả -->
+    <div class="search-wrapper">
+        <div class="search-bar">
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M10.5 4a6.5 6.5 0 0 1 5.11 10.57l3.91 3.91a1 1 0 0 1-1.42 1.42l-3.91-3.91A6.5 6.5 0 1 1 10.5 4zm0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z" />
+                </svg>
+            </span>
+            <input type="text" class="search-input" placeholder="Tìm nhanh: flex, grid, box-sizing, :hover, @media...">
+            <button class="search-btn" type="button">
+                Tìm kiếm
+            </button>
+        </div>
+        <p class="search-hint">
+            Gõ từ khóa rồi nhấn <strong>Enter</strong> hoặc nút <strong>Tìm kiếm</strong> 
+        </p>
+        <ul class="search-results"></ul>
+    </div>
+
+    <div class="badge"><span></span> CSS </div>
+
+    <!-- 1. Cấu trúc & cách nhúng CSS -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill basic">#1</div>
+                <h2>1. Cấu trúc & 3 cách nhúng CSS</h2>
+            </div>
+            <span class="tag tag-css">Basic CSS</span>
+        </div>
+
+        <p class="sub-title">1.1 Cú pháp CSS</p>
+        <pre><code>selector {
+    property: value;
+}</code></pre>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <div class="demo-label">Cú pháp & ví dụ</div>
+                <pre><code>p {
+    color: #38bdf8;
+    font-size: 18px;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Kết quả hiển thị</div>
+                <p style="color:#38bdf8;font-size:18px;margin-top:6px;">
+                    Đoạn &lt;p&gt; này sẽ có màu xanh dương và chữ to hơn.
+                </p>
+            </div>
+        </div>
+
+        <p class="sub-title">1.2 3 cách nhúng CSS</p>
+        <ul>
+            <li><strong>Inline</strong> (trong thuộc tính <code>style</code>): <code>&lt;p style="color:red"&gt;</code>
+            </li>
+            <li><strong>Internal</strong> (trong thẻ <code>&lt;style&gt;</code> trong <code>&lt;head&gt;</code>)</li>
+            <li><strong>External</strong> (file .css riêng, nối bằng <code>&lt;link rel="stylesheet"&gt;</code>)</li>
+        </ul>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">Inline style</p>
+                <pre><code>&lt;p style="color:red;"&gt;Xin chào&lt;/p&gt;</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">External style</p>
+                <pre><code>&lt;link rel="stylesheet" href="style.css" /&gt;</code></pre>
+            </div>
+        </div>
+
+        <p class="note">💡 Thực tế dự án: luôn ưu tiên <strong>external CSS</strong> để dễ quản lý & reuse.</p>
+    </section>
+
+    <!-- 2. Selectors -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill selector">Sel</div>
+                <h2>2. Selectors (bộ chọn) – CỰC HAY GẶP</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Dùng suốt dự án</span>
+        </div>
+
+        <p class="sub-title">2.1 Selector cơ bản</p>
+        <ul>
+            <li><code>p</code> : selector theo tên thẻ.</li>
+            <li><code>.class-name</code> : selector theo class.</li>
+            <li><code>#id-name</code> : selector theo id (duy nhất).</li>
+            <li><code>*</code> : universal selector (mọi phần tử).</li>
+            <li><code>h1, h2, p</code> : group nhiều selector.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <div class="demo-label">Cú pháp & ví dụ</div>
+                <pre><code>h1 {
+    font-size: 32px;
+}
+
+.title {
+    color: #f472b6;
+}
+
+#main {
+    padding: 20px;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Kết quả hiển thị</div>
+                <h3 style="font-size:20px;margin-top:6px;">HTML mẫu:</h3>
+                <pre><code>&lt;h1&gt;Tiêu đề&lt;/h1&gt;
+&lt;p class="title"&gt;Chữ màu hồng&lt;/p&gt;
+&lt;div id="main"&gt;Có padding 20px&lt;/div&gt;</code></pre>
+            </div>
+        </div>
+
+        <p class="sub-title">2.2 Combinator selectors (quan hệ cha-con / anh em)</p>
+        <ul>
+            <li><code>.card p</code> : mọi <code>&lt;p&gt;</code> nằm bên trong phần tử có class <code>card</code>.</li>
+            <li><code>.card &gt; p</code> : chỉ <code>&lt;p&gt;</code> con trực tiếp của <code>.card</code>.</li>
+            <li><code>h2 + p</code> : <code>&lt;p&gt;</code> ngay sau <code>&lt;h2&gt;</code>.</li>
+            <li><code>h2 ~ p</code> : các <code>&lt;p&gt;</code> cùng cấp sau <code>&lt;h2&gt;</code>.</li>
+        </ul>
+
+        <p class="sub-title">2.3 Attribute selectors</p>
+        <ul>
+            <li><code>input[type="text"]</code></li>
+            <li><code>a[target="_blank"]</code></li>
+            <li><code>a[href^="https"]</code> (bắt đầu bằng).</li>
+            <li><code>a[href$=".pdf"]</code> (kết thúc bằng).</li>
+            <li><code>a[href*="google"]</code> (chứa chuỗi).</li>
+        </ul>
+
+        <p class="important hot">
+            🔥 Hiểu selectors tốt = CSS gọn, ít class rác, dễ maintain trong dự án lớn.
+        </p>
+    </section>
+
+    <!-- 3. Box Model -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill.box pill">Box</div>
+                <h2>3. Box Model, margin, padding, border, box-sizing</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Layout nền tảng</span>
+        </div>
+
+        <p class="sub-title">3.1 Các thành phần của box</p>
+        <ul>
+            <li><code>width</code>, <code>height</code> : kích thước nội dung.</li>
+            <li><code>padding</code> : khoảng cách từ nội dung tới border (bên trong).</li>
+            <li><code>border</code> : viền.</li>
+            <li><code>margin</code> : khoảng cách bên ngoài.</li>
+            <li><code>box-sizing</code> : cách trình duyệt tính kích thước tổng.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <div class="demo-label">Cú pháp & ví dụ</div>
+                <pre><code>.card {
+    width: 260px;
+    padding: 16px;
+    margin: 12px 0;
+    border: 2px solid #38bdf8;
+    box-sizing: border-box;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Kết quả (demo)</div>
+                <div class="demo-box-border">
+                    Đây là 1 &lt;div class="card"&gt; với padding, margin, border và
+                    <code>box-sizing: border-box</code>.
+                </div>
+            </div>
+        </div>
+
+        <p class="sub-title">3.2 box-sizing</p>
+        <ul>
+            <li><code>content-box</code> (mặc định) : width chỉ tính nội dung.</li>
+            <li><code>border-box</code> : width = content + padding + border (dễ layout hơn).</li>
+        </ul>
+
+        <pre><code>* {
+    box-sizing: border-box; /* Rất hay dùng trong dự án */
+}</code></pre>
+    </section>
+
+    <!-- 4. Units & kích thước -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill basic">U</div>
+                <h2>4. Units & kích thước: px, %, em, rem, vw, vh...</h2>
+            </div>
+            <span class="tag tag-css">Units</span>
+        </div>
+
+        <p class="sub-title">4.1 Units thường dùng</p>
+        <ul>
+            <li><code>px</code> : tuyệt đối (pixel).</li>
+            <li><code>%</code> : phần trăm so với phần tử cha.</li>
+            <li><code>em</code> : dựa trên <code>font-size</code> của phần tử cha.</li>
+            <li><code>rem</code> : dựa trên <code>font-size</code> của <code>html</code>.</li>
+            <li><code>vw</code>, <code>vh</code> : % theo chiều rộng/cao viewport.</li>
+            <li><code>min()</code>, <code>max()</code>, <code>clamp()</code> : giá trị linh hoạt.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <div class="demo-label">Ví dụ</div>
+                <pre><code>.box {
+    width: 50%;
+    max-width: 400px;
+    padding: 1.5rem;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Ý nghĩa</div>
+                <p>Chiều rộng chiếm 50% cha, nhưng không vượt quá 400px, padding theo rem (gắn với font-size gốc).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Typography & text -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill typography">Tx</div>
+                <h2>5. Chữ (typography): font, size, weight, line-height, text-*</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – UI / đọc nội dung</span>
+        </div>
+
+        <p class="sub-title">5.1 Thuộc tính chữ hay gặp</p>
+        <ul>
+            <li><code>font-family</code> : họ font.</li>
+            <li><code>font-size</code>, <code>font-weight</code> (400, 500, 600...).</li>
+            <li><code>line-height</code> : độ cao dòng (tránh chữ dính).</li>
+            <li><code>text-align</code> : trái/phải/giữa/justify.</li>
+            <li><code>text-transform</code> : uppercase / lowercase / capitalize.</li>
+            <li><code>text-decoration</code> : underline / line-through / none.</li>
+            <li><code>letter-spacing</code>, <code>word-spacing</code>.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <div class="demo-label">Cú pháp & ví dụ</div>
+                <pre><code>.heading {
+    font-family: system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Kết quả hiển thị</div>
+                <p class="demo-text-center demo-text-large" style="letter-spacing:0.12em;">
+                    Tiêu đề demo
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Màu sắc & background -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill color">Bg</div>
+                <h2>6. Màu sắc & Background: color, gradient, image</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Brand, Theme, UI</span>
+        </div>
+
+        <p class="sub-title">6.1 Màu chữ & màu nền</p>
+        <ul>
+            <li><code>color</code> : màu chữ.</li>
+            <li><code>background-color</code> : màu nền.</li>
+            <li>Định dạng: tên màu, <code>#hex</code>, <code>rgb()</code>, <code>rgba()</code>, <code>hsl()</code>.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <pre><code>.tag-primary {
+    color: #0f172a;
+    background-color: #38bdf8;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <span style="color:#0f172a;background:#38bdf8;border-radius:999px;padding:2px 10px;font-size:0.85rem;">
+                    Tag màu xanh dương
+                </span>
+            </div>
+        </div>
+
+        <p class="sub-title">6.2 Background nâng cao</p>
+        <ul>
+            <li><code>background-image</code> : url(...) hoặc gradient.</li>
+            <li><code>background-size</code> : cover / contain.</li>
+            <li><code>background-position</code> : center / top / ...</li>
+            <li><code>background-repeat</code> : no-repeat / repeat.</li>
+        </ul>
+
+        <pre><code>.hero {
+    background-image: linear-gradient(135deg, #38bdf8, #ec4899);
+    color: white;
+}</code></pre>
+    </section>
+
+    <!-- 7. Display, visibility, opacity -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill layout">Ds</div>
+                <h2>7. Display, visibility, opacity</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Điều khiển thấy/ẩn</span>
+        </div>
+
+        <p class="sub-title">7.1 display</p>
+        <ul>
+            <li><code>display: block;</code> : chiếm full hàng, xuống dòng.</li>
+            <li><code>display: inline;</code> : không xuống dòng, không set width/height.</li>
+            <li><code>display: inline-block;</code> : giống inline nhưng set được width/height.</li>
+            <li><code>display: none;</code> : ẩn hoàn toàn (không chiếm chỗ).</li>
+            <li><code>display: flex;</code>, <code>display: grid;</code> : layout nâng cao.</li>
+        </ul>
+
+        <p class="sub-title">7.2 visibility vs opacity</p>
+        <ul>
+            <li><code>visibility: hidden;</code> : ẩn nhưng vẫn chiếm diện tích.</li>
+            <li><code>opacity: 0;</code> : trong suốt, vẫn click được.</li>
+        </ul>
+    </section>
+
+    <!-- 8. Position & z-index -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill layout">Pos</div>
+                <h2>8. Position: relative, absolute, fixed, sticky & z-index</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Header, popup, overlay</span>
+        </div>
+
+        <p class="sub-title">8.1 Các kiểu position</p>
+        <ul>
+            <li><code>static</code> : mặc định.</li>
+            <li><code>relative</code> : tương đối với vị trí ban đầu.</li>
+            <li><code>absolute</code> : tuyệt đối so với phần tử cha gần nhất có position khác static.</li>
+            <li><code>fixed</code> : cố định theo viewport.</li>
+            <li><code>sticky</code> : dính khi scroll (thường dùng với top: 0).</li>
+        </ul>
+
+        <pre><code>.badge-fixed {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+}</code></pre>
+
+        <p class="sub-title">8.2 z-index</p>
+        <ul>
+            <li><code>z-index</code> quyết định thứ tự chồng lớp (layer).</li>
+            <li>Chỉ có tác dụng khi phần tử có <code>position</code> khác <code>static</code>.</li>
+        </ul>
+
+        <div class="demo-box">
+            <span class="demo-badge-hot">Tip: modal / overlay / dropdown hay dùng z-index cao (9999).</span>
+        </div>
+    </section>
+
+    <!-- 9. Flexbox -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill flex">Fx</div>
+                <h2>9. Flexbox – layout hàng/cột linh hoạt</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Dùng suốt UI hiện đại</span>
+        </div>
+
+        <p class="sub-title">9.1 Thuộc tính trên container</p>
+        <ul>
+            <li><code>display: flex;</code> : bật flex.</li>
+            <li><code>flex-direction</code> : row / column.</li>
+            <li><code>justify-content</code> : căn ngang main axis (center, space-between...).</li>
+            <li><code>align-items</code> : căn dọc cross axis.</li>
+            <li><code>flex-wrap</code> : xuống hàng khi thiếu chỗ.</li>
+            <li><code>gap</code> : khoảng cách giữa item.</li>
+        </ul>
+
+        <p class="sub-title">9.2 Thuộc tính trên item</p>
+        <ul>
+            <li><code>flex</code> (short-hand của <code>flex-grow flex-shrink flex-basis</code>).</li>
+            <li><code>align-self</code> : override <code>align-items</code> cho 1 item.</li>
+            <li><code>order</code> : đổi thứ tự hiển thị.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <pre><code>.menu {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.menu-item {
+    padding: 6px 12px;
+    border-radius: 999px;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Demo flex</div>
+                <div class="demo-flex-row">
+                    <div class="demo-flex-item">Home</div>
+                    <div class="demo-flex-item">About</div>
+                    <div class="demo-flex-item">Contact</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. CSS Grid -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill grid">Gr</div>
+                <h2>10. CSS Grid – layout 2 chiều</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Dashboard, gallery</span>
+        </div>
+
+        <p class="sub-title">10.1 Thuộc tính cơ bản</p>
+        <ul>
+            <li><code>display: grid;</code></li>
+            <li><code>grid-template-columns</code> : định nghĩa cột.</li>
+            <li><code>grid-template-rows</code> : định nghĩa hàng.</li>
+            <li><code>gap</code> : khoảng cách giữa ô.</li>
+            <li><code>justify-items</code>, <code>align-items</code>.</li>
+        </ul>
+
+        <div class="demo-row">
+            <div class="demo-box">
+                <pre><code>.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}</code></pre>
+            </div>
+            <div class="demo-preview">
+                <div class="demo-label">Demo grid</div>
+                <div class="demo-grid">
+                    <div class="demo-grid-item">1</div>
+                    <div class="demo-grid-item">2</div>
+                    <div class="demo-grid-item">3</div>
+                    <div class="demo-grid-item">4</div>
+                    <div class="demo-grid-item">5</div>
+                    <div class="demo-grid-item">6</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Border, radius, shadow -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill color">Bd</div>
+                <h2>11. Viền (border), bo góc (border-radius), bóng (box-shadow)</h2>
+            </div>
+            <span class="tag tag-css">Card / Button styles</span>
+        </div>
+
+        <p class="sub-title">11.1 Border</p>
+        <pre><code>.box {
+    border: 2px solid #38bdf8; /* width style color */
+}</code></pre>
+
+        <p class="sub-title">11.2 Border-radius</p>
+        <pre><code>.pill {
+    border-radius: 999px;
+}</code></pre>
+
+        <p class="sub-title">11.3 Box-shadow</p>
+        <pre><code>.card {
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+}</code></pre>
+    </section>
+
+    <!-- 12. Pseudo-classes & pseudo-elements -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill selector">::</div>
+                <h2>12. Pseudo-classes & pseudo-elements</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Hover, focus, before/after</span>
+        </div>
+
+        <p class="sub-title">12.1 Pseudo-classes hay gặp</p>
+        <ul>
+            <li><code>:hover</code> : khi rê chuột.</li>
+            <li><code>:active</code> : khi click xuống.</li>
+            <li><code>:focus</code>, <code>:focus-visible</code> : khi focus (input, button...).</li>
+            <li><code>:checked</code>, <code>:disabled</code>.</li>
+            <li><code>:first-child</code>, <code>:last-child</code>, <code>:nth-child()</code>.</li>
+        </ul>
+
+        <p class="sub-title">12.2 Pseudo-elements</p>
+        <ul>
+            <li><code>::before</code>, <code>::after</code> : chèn nội dung ảo.</li>
+            <li><code>::placeholder</code> : style placeholder input.</li>
+            <li><code>::selection</code> : style vùng bôi đen.</li>
+        </ul>
+
+        <pre><code>.btn::before {
+    content: "★ ";
+    color: gold;
+}</code></pre>
+    </section>
+
+    <!-- 13. Transition, transform, animation -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill.effect pill">An</div>
+                <h2>13. Transition, transform, keyframes animation</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Hover mượt, loading, skeleton</span>
+        </div>
+
+        <p class="sub-title">13.1 Transition</p>
+        <pre><code>.btn {
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px) scale(1.02);
+}</code></pre>
+
+        <p class="sub-title">13.2 Transform</p>
+        <ul>
+            <li><code>transform: translate(x, y)</code></li>
+            <li><code>transform: scale()</code></li>
+            <li><code>transform: rotate()</code></li>
+            <li><code>transform: skew()</code></li>
+        </ul>
+
+        <p class="sub-title">13.3 Animation với @keyframes</p>
+        <pre><code>@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+.pulse {
+    animation: pulse 1.2s infinite;
+}</code></pre>
+    </section>
+
+    <!-- 14. Responsive & media query -->
+    <section class="section hot">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill responsive">R</div>
+                <h2>14. Responsive: Media Query & breakpoint</h2>
+            </div>
+            <span class="tag tag-hot">HOT 🔥 – Mobile / Tablet / Desktop</span>
+        </div>
+
+        <p class="sub-title">14.1 Cú pháp cơ bản</p>
+        <pre><code>@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}</code></pre>
+
+        <ul>
+            <li><code>max-width</code> : áp dụng khi viewport ≤ giá trị.</li>
+            <li><code>min-width</code> : áp dụng khi viewport ≥ giá trị.</li>
+            <li>Thường dùng breakpoint: 640 / 768 / 1024 / 1280 / 1536...</li>
+        </ul>
+
+        <p class="sub-title">14.2 Ví dụ layout đổi cột</p>
+        <pre><code>.layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+    </section>
+
+    <!-- 15. CSS Variables, calc, misc -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill basic">Var</div>
+                <h2>15. Biến CSS (custom properties), calc(), các thứ vặt</h2>
+            </div>
+            <span class="tag tag-css">Modern CSS</span>
+        </div>
+
+        <p class="sub-title">15.1 Biến CSS</p>
+        <pre><code>:root {
+    --color-primary: #38bdf8;
+    --radius-lg: 16px;
+}
+
+.button {
+    background-color: var(--color-primary);
+    border-radius: var(--radius-lg);
+}</code></pre>
+
+        <p class="sub-title">15.2 calc()</p>
+        <pre><code>.sidebar {
+    width: calc(100% - 280px);
+}</code></pre>
+
+        <p class="sub-title">15.3 Một số thuộc tính vặt nhưng hay dùng</p>
+        <ul>
+            <li><code>cursor: pointer;</code> : cho button/link custom.</li>
+            <li><code>overflow: hidden / auto / scroll;</code>.</li>
+            <li><code>white-space: nowrap;</code> : không xuống dòng.</li>
+            <li><code>text-overflow: ellipsis;</code> + <code>overflow: hidden;</code> +
+                <code>white-space: nowrap;</code> :
+                3 combo cắt text thành ...
+            </li>
+            <li><code>object-fit: cover;</code> cho ảnh trong khung cố định.</li>
+            <li><code>user-select: none;</code> : không cho bôi đen.</li>
+        </ul>
+
+        <div class="important">
+            ✅ Nắm vững 15 nhóm kiến thức trên là đủ để xử lý 90–95% CSS trong các dự án frontend phổ biến (SPA,
+            dashboard, landing page...).
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            const input = document.querySelector('.search-input');
+            const btn = document.querySelector('.search-btn');
+            const resultsEl = document.querySelector('.search-results');
+            const current = location.pathname.split("/").pop() || "Html.html";
+
+            const map = {
+                "Html.html": "tab-html",
+                "Css.html": "tab-css",
+                "Js.html": "tab-js",
+                "NodeJs.html": "tab-node",
+                "ReacjsTailwind.html": "tab-react"
+            };
+
+            const activeId = map[current];
+            if (activeId) {
+                const el = document.getElementById(activeId);
+                if (el) el.classList.add("active");
+            }
+            if (!input || !btn || !resultsEl) return;
+
+            // Thu thập dữ liệu các section (mỗi section là 1 "mục kiến thức")
+            const sections = Array.from(document.querySelectorAll('section.section'));
+            const data = sections.map((sec, idx) => {
+                let id = sec.id;
+                if (!id) {
+                    id = 'sec-' + (idx + 1);
+                    sec.id = id;
+                }
+                const titleEl = sec.querySelector('h2');
+                const title = titleEl ? titleEl.textContent.trim() : 'Mục ' + (idx + 1);
+                const text = sec.textContent.toLowerCase();
+                return { id, title, text, element: sec };
+            });
+
+            let currentResults = [];
+            let activeIndex = -1;
+
+            function clearHighlight() {
+                document.querySelectorAll('.search-hit').forEach(el => {
+                    el.classList.remove('search-hit');
+                });
+            }
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, c => {
+                    const map = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    };
+                    return map[c] || c;
+                });
+            }
+
+            function makeSnippet(fullText, query) {
+                const lower = fullText.toLowerCase();
+                const q = query.toLowerCase();
+                const idx = lower.indexOf(q);
+                if (idx === -1) return '';
+                const radius = 40;
+                let start = Math.max(0, idx - radius);
+                let end = Math.min(fullText.length, idx + q.length + radius);
+                let snippet = fullText.slice(start, end).replace(/\s+/g, ' ');
+                if (start > 0) snippet = '...' + snippet;
+                if (end < fullText.length) snippet = snippet + '...';
+                return snippet;
+            }
+
+            function renderResults(query) {
+                resultsEl.innerHTML = '';
+                activeIndex = -1;
+
+                if (!query) {
+                    return;
+                }
+
+                const q = query.toLowerCase();
+                currentResults = data.filter(sec => sec.text.includes(q));
+
+                if (currentResults.length === 0) {
+                    resultsEl.innerHTML =
+                        '<li class="search-result-empty">Không tìm thấy kết quả cho: <strong>' +
+                        escapeHtml(query) +
+                        '</strong></li>';
+                    return;
+                }
+
+                const itemsHtml = currentResults.map((sec, idx) => {
+                    const snippet = makeSnippet(sec.text, q);
+                    return `
+<li class="search-result-item" data-index="${idx}">
+    <div class="search-result-icon">⌕</div>
+    <div class="search-result-content">
+        <div class="search-result-title">${escapeHtml(sec.title)}</div>
+        <div class="search-result-snippet">${escapeHtml(snippet)}</div>
+    </div>
+</li>`;
+                }).join('');
+
+                resultsEl.innerHTML = itemsHtml;
+            }
+
+            function scrollToResult(index) {
+                const item = currentResults[index];
+                if (!item) return;
+                clearHighlight();
+                item.element.classList.add('search-hit');
+                item.element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                resultsEl.innerHTML = '';
+            }
+
+            function doSearch() {
+                const q = input.value.trim();
+                if (!q) {
+                    resultsEl.innerHTML = '';
+                    currentResults = [];
+                    activeIndex = -1;
+                    return;
+                }
+                renderResults(q);
+            }
+
+            function updateActiveItem() {
+                const items = Array.from(resultsEl.querySelectorAll('.search-result-item'));
+                items.forEach((li, idx) => {
+                    li.classList.toggle('is-active', idx === activeIndex);
+                });
+            }
+
+            btn.addEventListener('click', doSearch);
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    if (currentResults.length > 0 && activeIndex >= 0) {
+                        e.preventDefault();
+                        scrollToResult(activeIndex);
+                    } else {
+                        e.preventDefault();
+                        doSearch();
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    if (!currentResults.length) return;
+                    e.preventDefault();
+                    activeIndex = (activeIndex + 1) % currentResults.length;
+                    updateActiveItem();
+                } else if (e.key === 'ArrowUp') {
+                    if (!currentResults.length) return;
+                    e.preventDefault();
+                    activeIndex = (activeIndex - 1 + currentResults.length) % currentResults.length;
+                    updateActiveItem();
+                }
+            });
+
+            resultsEl.addEventListener('click', function (e) {
+                const item = e.target.closest('.search-result-item');
+                if (!item) return;
+                const index = Number(item.dataset.index);
+                scrollToResult(index);
+            });
+
+            document.addEventListener('click', function (e) {
+                const wrapper = document.querySelector('.search-wrapper');
+                if (!wrapper.contains(e.target)) {
+                    resultsEl.innerHTML = '';
+                    currentResults = [];
+                    activeIndex = -1;
+                }
+            });
+        })();
+
+    </script>
+
+</body>
+
+</html>

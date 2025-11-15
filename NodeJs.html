@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>NodeJS Cheat Sheet</title>
+    <link rel="icon" type="image/png" href="logo2.png">
+
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-card: #020617;
+            --bg-soft: #0b1120;
+            --accent-pink: #f472b6;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-purple: #a855f7;
+            --accent-red: #fb7185;
+            --accent-orange: #fb923c;
+            --text-main: #e5e7eb;
+            --text-soft: #9ca3af;
+            --code-bg: #020617;
+            --border-soft: rgba(148, 163, 184, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        /* ===== MENU 5 FILE – STYLE GIỐNG TABS ===== */
+/* ===== MENU 5 FILE – KHÔNG CÓ KHUNG NỀN ===== */
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0;              /* bỏ padding khung */
+  background: transparent; /* bỏ nền */
+  border: none;            /* bỏ viền */
+  border-radius: 0;        /* bỏ bo góc khung */
+  backdrop-filter: none;   /* bỏ blur */
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+
+
+/* Giống .tab-btn nhưng dùng class riêng để không conflict script tab React/Tailwind */
+.top-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text-soft);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s,
+    transform 0.1s,
+    box-shadow 0.15s;
+}
+
+.top-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+}
+
+/* Hover */
+.top-tab-btn:hover {
+  color: #e5e7eb;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Active = file hiện tại */
+.top-tab-btn.active {
+  color: #0b1120;
+  border-color: var(--accent-blue);
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+  box-shadow: 0 10px 22px rgba(56, 189, 248, 0.45);
+  transform: translateY(-1px);
+}
+
+.top-tab-btn.active .top-tab-dot {
+  background: #0b1120;
+}
+
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.7;
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 16px 40px;
+            background: radial-gradient(circle at top left, #1e293b 0, #020617 60%);
+            color: var(--text-main);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f9fafb;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-soft);
+            margin-bottom: 10px;
+            font-size: 0.96rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.35), rgba(52, 211, 153, 0.2));
+            margin-bottom: 10px;
+        }
+
+        .badge span {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent-green);
+        }
+
+        .section {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+        }
+
+        .sec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .pill {
+            width: 26px;
+            height: 26px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #020617;
+        }
+
+        .pill.core {
+            background: var(--accent-green);
+        }
+
+        .pill.npm {
+            background: var(--accent-orange);
+        }
+
+        .pill.module {
+            background: var(--accent-blue);
+        }
+
+        .pill.fs {
+            background: var(--accent-yellow);
+        }
+
+        .pill.http {
+            background: var(--accent-red);
+        }
+
+        .pill.express {
+            background: var(--accent-purple);
+        }
+
+        .pill.api {
+            background: #22d3ee;
+        }
+
+        .pill.db {
+            background: #22c55e;
+        }
+
+        .pill.auth {
+            background: #f97316;
+        }
+
+        .pill.deploy {
+            background: #a3e635;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--text-soft);
+        }
+
+        .tag-node {
+            border-color: rgba(74, 222, 128, 0.9);
+            color: #bbf7d0;
+        }
+
+        p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+        }
+
+        ul,
+        ol {
+            margin: 6px 0 8px 18px;
+            font-size: 0.94rem;
+        }
+
+        li+li {
+            margin-top: 3px;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 0.86rem;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            overflow-x: auto;
+            font-size: 0.86rem;
+            margin: 8px 0;
+        }
+
+        pre code {
+            border: none;
+            padding: 0;
+            background: transparent;
+        }
+
+        .sub-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 4px;
+            margin-bottom: 4px;
+            font-size: 0.94rem;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px;
+        }
+
+        .important {
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 10px;
+            margin-top: 8px;
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        .hot {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .hot-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 6px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(248, 113, 113, 0.9);
+            color: #fecaca;
+            background: rgba(127, 29, 29, 0.4);
+            margin-left: 6px;
+        }
+
+        .hot-badge::before {
+            content: "🔥";
+            font-size: 0.75rem;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            margin-right: 6px;
+            margin-top: 4px;
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent-blue);
+        }
+
+        .chip.green .chip-dot {
+            background: var(--accent-green);
+        }
+
+        .chip.red .chip-dot {
+            background: var(--accent-red);
+        }
+
+        .chip.yellow .chip-dot {
+            background: var(--accent-yellow);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0 12px 28px;
+            }
+        }
+
+        /* ===== Khung tìm kiếm ===== */
+
+        .search-wrapper {
+            position: sticky;
+            top: 50px;
+            z-index: 40;
+            max-width: 750px;
+            margin: 12px auto 18px;
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 999px;
+            padding: 6px 8px 6px 10px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+        }
+
+        .search-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-green);
+        }
+
+        .search-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            padding: 4px 8px;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-soft);
+            opacity: 0.8;
+        }
+
+        .search-btn {
+            flex-shrink: 0;
+            border: none;
+            outline: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            background: linear-gradient(135deg,
+                    var(--accent-green),
+                    var(--accent-blue));
+            color: #0b1120;
+            box-shadow: 0 6px 16px rgba(74, 222, 128, 0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 9px 22px rgba(74, 222, 128, 0.55);
+            filter: brightness(1.05);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.8);
+        }
+
+        .search-hint {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            text-align: center;
+        }
+
+        .search-results {
+            margin-top: 6px;
+            padding: 4px 0;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            list-style: none;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .search-results:empty {
+            display: none;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+
+        .search-result-item:hover,
+        .search-result-item.is-active {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .search-result-icon {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--text-soft);
+            font-size: 0.65rem;
+        }
+
+        .search-result-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-result-title {
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-snippet {
+            color: var(--text-soft);
+            font-size: 0.78rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-empty {
+            padding: 6px 10px;
+            font-size: 0.86rem;
+            color: var(--text-soft);
+        }
+
+        .search-hit {
+            outline: 2px solid var(--accent-green);
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4);
+            border-radius: 6px;
+            animation: searchBlink 1s ease-out 0s 1;
+        }
+
+        @keyframes searchBlink {
+            0% {
+                background-color: rgba(34, 197, 94, 0.22);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+         .author-links {
+  margin-bottom: 26px;   
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;       /* tăng khoảng cách để không dính chùm */
+  flex-wrap: wrap;
+}
+
+.author-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;       /* tách icon với chữ */
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.author-item:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Icon GitHub */
+.github-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-blue);
+}
+
+/* Icon tiền Donate */
+.money-icon {
+  width: 20px;
+  height: 20px;
+  color: #0b1120; /* icon sáng nổi */
+}
+
+/* Donate style */
+.donate-box {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: #0b1120;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.35);
+}
+    </style>
+</head>
+
+<body>
+
+    <h1>NODEJS CHEAT SHEET</h1>
+    <p class="subtitle">Từ runtime, module, fs, HTTP, Express, REST API, DB, auth tới deploy – đủ dùng cho hầu hết
+        dự án NodeJS cơ bản–trung bình.</p>
+  <p class="subtitle">- Ikigai, Kaizen, Shu-Ha-Ri -</p>
+<div class="author-links">
+  <a href="https://github.com/VietNgocAmbition" target="_blank" class="author-item">
+    <svg class="github-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-4.3 1-4.3-2.5-6-3m12 5v-3.5c0-.9.1-1.3-.5-2 
+               2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 
+               4.2 4.2 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C7 2.8 6 3 6 3 
+               a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.6 9.4c0 4.5 2.7 5.7 5.5 6 
+               -.3.4-.6 1.1-.7 2V21" />
+    </svg>
+    <span>GitHub: VietNgocAmbition</span>
+  </a>
+
+  <div class="author-item donate-box">
+    <svg class="money-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M2 10c2 0 3-2 3-2m17 2c-2 0-3-2-3-2m-14 6c2 0 3 2 3 2m14-2c-2 0-3 2-3 2"></path>
+    </svg>
+    <span>Donate: TPBank - 26304032004</span>
+  </div>
+</div>
+
+  <nav class="top-tabs">
+        <a href="Html.html" class="top-tab-btn" id="tab-html">
+            <span class="top-tab-dot"></span>
+            HTML
+        </a>
+        <a href="Css.html" class="top-tab-btn" id="tab-css">
+            <span class="top-tab-dot"></span>
+            CSS
+        </a>
+        <a href="Js.html" class="top-tab-btn" id="tab-js">
+            <span class="top-tab-dot"></span>
+            JavaScript
+        </a>
+        <a href="ReacjsTailwind.html" class="top-tab-btn" id="tab-react">
+            <span class="top-tab-dot"></span>
+            ReactJS & Tailwind
+        </a>
+        <a href="NodeJs.html" class="top-tab-btn" id="tab-node">
+            <span class="top-tab-dot"></span>
+            NodeJS
+        </a>
+
+    </nav>
+    <!-- Khung tìm kiếm + dropdown kết quả -->
+    <div class="search-wrapper">
+        <div class="search-bar">
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M10.5 4a6.5 6.5 0 0 1 5.11 10.57l3.91 3.91a1 1 0 0 1-1.42 1.42l-3.91-3.91A6.5 6.5 0 1 1 10.5 4zm0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z" />
+                </svg>
+            </span>
+            <input type="text" class="search-input" placeholder="Tìm: express, fs, http, jwt, mongoose, pm2...">
+            <button class="search-btn" type="button">
+                Tìm kiếm
+            </button>
+        </div>
+        <p class="search-hint">
+            Gõ từ khóa rồi nhấn <strong>Enter</strong> hoặc nút <strong>Tìm kiếm</strong>
+        </p>
+        <ul class="search-results"></ul>
+    </div>
+
+    <div class="badge"><span></span> NodeJS</div>
+
+    <!-- 1. NodeJS là gì & Event Loop -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill core">N</div>
+                <h2>1. NodeJS là gì? – Runtime & Event Loop</h2>
+            </div>
+            <span class="tag tag-node">Core Concept</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">1.1 Khái niệm</p>
+                <ul>
+                    <li><span class="hot">NodeJS</span> là môi trường chạy JS <strong>ngoài trình duyệt</strong>.</li>
+                    <li>Dựa trên <code>V8 Engine</code> (Google Chrome).</li>
+                    <li>Non-blocking I/O, <span class="hot">event-driven</span>, rất hợp để làm API.</li>
+                    <li>1 thread chính + <code>event loop</code> xử lý async.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="sub-title">1.2 File Node đơn giản</p>
+                <pre><code>// hello.js
+console.log("Xin chào từ NodeJS");</code></pre>
+                <pre><code># Chạy file
+node hello.js
+
+# Kết quả:
+Xin chào từ NodeJS</code></pre>
+            </div>
+        </div>
+
+        <div class="important">
+            <span class="hot">Ghi nhớ:</span> NodeJS không phải framework, mà là <strong>runtime</strong>.
+            Express, NestJS... mới là framework chạy trên Node.
+        </div>
+    </section>
+
+    <!-- 2. Cài Node, npm & npm init -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill core">N</div>
+                <h2>2. Cài Node, npm & khởi tạo dự án</h2>
+            </div>
+            <span class="tag tag-node">Setup</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">2.1 Kiểm tra version</p>
+                <pre><code># Kiểm tra phiên bản
+node -v
+npm -v</code></pre>
+
+                <p class="sub-title">2.2 Khởi tạo project Node</p>
+                <pre><code># Tạo folder mới
+mkdir my-app
+cd my-app
+
+# Khởi tạo package.json
+npm init -y    # tạo nhanh với default</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">2.3 Cấu trúc cơ bản</p>
+                <pre><code>my-app/
+  ├─ package.json
+  ├─ package-lock.json
+  └─ index.js</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Rất hay gặp</span>
+                    Mọi dự án Node nghiêm túc đều có <code>package.json</code> để lưu info + dependencies + scripts.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. NPM & package.json -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill npm">P</div>
+                <h2>3. NPM & package.json</h2>
+            </div>
+            <span class="tag tag-node">NPM</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">3.1 Cài package</p>
+                <pre><code># Cài lib thường dùng
+npm install express          # dependencies (prod)
+npm install nodemon --save-dev  # devDependencies</code></pre>
+
+                <p class="sub-title">3.2 package.json</p>
+                <pre><code>{
+  "name": "my-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">3.3 Chạy script</p>
+                <pre><code># Chạy script "start"
+npm run start
+
+# Chạy script "dev"
+npm run dev</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Rất hay gặp</span>
+                    Việc define script "dev" + dùng <code>nodemon</code> là pattern quen thuộc trong mọi dự án Node.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Module system (CommonJS & ESM) -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill module">M</div>
+                <h2>4. Module hệ thống: CommonJS & ES Module</h2>
+            </div>
+            <span class="tag tag-node">Modules</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">4.1 CommonJS (cũ nhưng vẫn rất nhiều dự án dùng)</p>
+                <pre><code>// math.js
+function sum(a, b) {
+  return a + b;
+}
+
+module.exports = { sum };</code></pre>
+
+                <pre><code>// index.js
+const { sum } = require("./math");
+
+console.log(sum(2, 3)); // 5</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">4.2 ES Module (mới hơn, giống frontend)</p>
+                <pre><code>// package.json
+{
+  "type": "module"
+}</code></pre>
+
+                <pre><code>// math.js
+export function sum(a, b) {
+  return a + b;
+}
+
+// index.js
+import { sum } from "./math.js";
+
+console.log(sum(4, 6)); // 10</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Quan trọng</span>
+                    Dự án mới thường dùng <code>"type": "module"</code> + <code>import/export</code>.
+                    Dự án cũ vẫn dùng <code>require/module.exports</code>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Đường dẫn & môi trường -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill module">P</div>
+                <h2>5. Đường dẫn, __dirname, process.env</h2>
+            </div>
+            <span class="tag tag-node">Path & Env</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">5.1 path & __dirname (CommonJS)</p>
+                <pre><code>const path = require("path");
+
+console.log(__dirname); // thư mục hiện tại
+
+const filePath = path.join(__dirname, "data", "file.txt");
+console.log(filePath);</code></pre>
+
+                <p class="sub-title">5.2 process.env</p>
+                <pre><code>// .env (dùng dotenv)
+PORT=4000
+MONGO_URL=mongodb://localhost:27017/mydb</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">5.3 Dùng dotenv</p>
+                <pre><code>npm install dotenv</code></pre>
+                <pre><code>// index.js
+require("dotenv").config();
+
+const port = process.env.PORT || 3000;
+console.log("Server sẽ chạy cổng:", port);</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Rất hay gặp</span>
+                    Luôn dùng <code>dotenv</code> + <code>process.env</code> để không hard-code password, URL DB.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. File system (fs) cơ bản -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill fs">F</div>
+                <h2>6. File system (fs) – đọc/ghi file</h2>
+            </div>
+            <span class="tag tag-node">fs</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">6.1 Async callback</p>
+                <pre><code>const fs = require("fs");
+const path = require("path");
+
+const filePath = path.join(__dirname, "note.txt");
+
+// Ghi file
+fs.writeFile(filePath, "Xin chào NodeJS", (err) =&gt; {
+  if (err) return console.error(err);
+  console.log("Đã ghi file!");
+
+  // Đọc file
+  fs.readFile(filePath, "utf8", (err, data) =&gt; {
+    if (err) return console.error(err);
+    console.log("Nội dung:", data);
+  });
+});</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">6.2 Promise / async-await (gọn hơn)</p>
+                <pre><code>const fs = require("fs/promises");
+
+async function main() {
+  await fs.writeFile("data.txt", "Hello from async/await");
+  const content = await fs.readFile("data.txt", "utf8");
+  console.log(content);
+}
+
+main().catch(console.error);</code></pre>
+                <p class="note">
+                    <span class="hot-badge">Quan trọng</span>
+                    Thực tế nên ưu tiên dùng <code>fs/promises</code> + <code>async/await</code> cho code gọn & dễ đọc.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. HTTP server thuần -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill http">H</div>
+                <h2>7. HTTP Server thuần (không dùng Express)</h2>
+            </div>
+            <span class="tag tag-node">http</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">7.1 Tạo server đơn giản</p>
+                <pre><code>const http = require("http");
+
+const server = http.createServer((req, res) =&gt; {
+  if (req.url === "/" &amp;&amp; req.method === "GET") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Hello từ server HTTP thuần!");
+  } else {
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("Không tìm thấy!");
+  }
+});
+
+server.listen(3000, () =&gt; {
+  console.log("Server chạy ở http://localhost:3000");
+});</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">7.2 Nhược điểm</p>
+                <ul>
+                    <li>Phải tự parse body, query string, router → rất mệt.</li>
+                    <li>Đó là lý do 99% dự án dùng <span class="hot">Express</span>, NestJS,... thay vì http thuần.</li>
+                </ul>
+
+                <p class="note">
+                    <span class="hot-badge">Hiểu để biết nền tảng</span>
+                    Dù ít dùng thực tế, biết http thuần giúp hiểu Express hoạt động bên trong.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Express cơ bản -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill express">E</div>
+                <h2>8. ExpressJS cơ bản – tạo server & routing</h2>
+            </div>
+            <span class="tag tag-node">Express</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">8.1 Cài & tạo server</p>
+                <pre><code>npm install express</code></pre>
+                <pre><code>// index.js
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware parse JSON
+app.use(express.json());
+
+app.get("/", (req, res) =&gt; {
+  res.send("Hello từ Express!");
+});
+
+app.listen(PORT, () =&gt; {
+  console.log(`Server chạy ở http://localhost:${PORT}`);
+});</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">8.2 Các method hay gặp</p>
+                <ul>
+                    <li><code>app.get(path, handler)</code></li>
+                    <li><code>app.post(path, handler)</code></li>
+                    <li><code>app.put(path, handler)</code></li>
+                    <li><code>app.delete(path, handler)</code></li>
+                    <li><code>app.use(middleware)</code></li>
+                </ul>
+                <p class="note">
+                    <span class="hot-badge">Cốt lõi</span>
+                    Nếu làm backend Node, <strong>Express + routing + middleware</strong> là combo em xài mỗi ngày.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Middleware -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill express">Mi</div>
+                <h2>9. Middleware trong Express</h2>
+            </div>
+            <span class="tag tag-node">Middleware</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">9.1 Logger middleware</p>
+                <pre><code>function logger(req, res, next) {
+  console.log(`${req.method} ${req.url}`);
+  next(); // cho request đi tiếp
+}
+
+app.use(logger);</code></pre>
+
+                <p class="sub-title">9.2 Middleware xử lý lỗi</p>
+                <pre><code>// đặt cuối cùng
+function errorHandler(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).json({ message: "Lỗi server!" });
+}
+
+app.use(errorHandler);</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">9.3 Sử dụng middleware sẵn có</p>
+                <pre><code>const cors = require("cors");
+
+app.use(cors());         // bật CORS
+app.use(express.json()); // parse JSON body</code></pre>
+                <p class="note">
+                    <span class="hot-badge">Rất hay gặp</span>
+                    <code>express.json()</code>, <code>cors()</code>, logger, error handler là bộ 4 middleware cực cơ
+                    bản
+                    trong mọi API.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. REST API CRUD -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill api">API</div>
+                <h2>10. REST API CRUD với Express</h2>
+            </div>
+            <span class="tag tag-node">REST</span>
+        </div>
+
+        <p class="sub-title">10.1 Ví dụ CRUD đơn giản (in-memory)</p>
+        <pre><code>let todos = [
+  { id: 1, title: "Học NodeJS", done: false },
+];
+
+// GET /todos - lấy danh sách
+app.get("/api/todos", (req, res) =&gt; {
+  res.json(todos);
+});
+
+// POST /todos - tạo mới
+app.post("/api/todos", (req, res) =&gt; {
+  const { title } = req.body;
+  const newTodo = { id: Date.now(), title, done: false };
+  todos.push(newTodo);
+  res.status(201).json(newTodo);
+});
+
+// PUT /todos/:id - cập nhật
+app.put("/api/todos/:id", (req, res) =&gt; {
+  const id = Number(req.params.id);
+  const todo = todos.find((t) =&gt; t.id === id);
+  if (!todo) return res.status(404).json({ message: "Không tìm thấy" });
+
+  todo.title = req.body.title ?? todo.title;
+  todo.done = req.body.done ?? todo.done;
+
+  res.json(todo);
+});
+
+// DELETE /todos/:id - xóa
+app.delete("/api/todos/:id", (req, res) =&gt; {
+  const id = Number(req.params.id);
+  todos = todos.filter((t) =&gt; t.id !== id);
+  res.status(204).send();
+});</code></pre>
+
+        <p class="note">
+            <span class="hot-badge">Cực kỳ quan trọng</span>
+            Pattern REST API CRUD kiểu này lặp đi lặp lại trong mọi dự án backend (chỉ khác DB & logic).
+        </p>
+    </section>
+
+    <!-- 11. MongoDB + Mongoose -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill db">Mg</div>
+                <h2>11. Kết nối MongoDB với Mongoose</h2>
+            </div>
+            <span class="tag tag-node">MongoDB</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">11.1 Cài & kết nối</p>
+                <pre><code>npm install mongoose</code></pre>
+                <pre><code>const mongoose = require("mongoose");
+
+async function connectDB() {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("✅ Kết nối MongoDB thành công");
+  } catch (err) {
+    console.error("❌ Lỗi kết nối MongoDB", err);
+    process.exit(1);
+  }
+}
+
+connectDB();</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">11.2 Tạo model & CRUD</p>
+                <pre><code>const todoSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  done: { type: Boolean, default: false },
+}, { timestamps: true });
+
+const Todo = mongoose.model("Todo", todoSchema);
+
+// Ví dụ dùng trong route:
+app.get("/api/todos", async (req, res, next) =&gt; {
+  try {
+    const todos = await Todo.find();
+    res.json(todos);
+  } catch (err) {
+    next(err);
+  }
+});</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Hay gặp</span>
+                    Stack phổ biến: <strong>Node + Express + MongoDB (MERN)</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. PostgreSQL + node-postgres -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill db">Pg</div>
+                <h2>12. Kết nối PostgreSQL với node-postgres</h2>
+            </div>
+            <span class="tag tag-node">PostgreSQL</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">12.1 Cài & client</p>
+                <pre><code>npm install pg</code></pre>
+                <pre><code>const { Pool } = require("pg");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+async function getUsers() {
+  const result = await pool.query("SELECT id, name FROM users");
+  return result.rows;
+}</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">12.2 Dùng trong route</p>
+                <pre><code>app.get("/api/users", async (req, res, next) =&gt; {
+  try {
+    const result = await pool.query("SELECT id, name FROM users");
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Thực tế</span>
+                    Dự án enterprise thường dùng DB quan hệ như <strong>PostgreSQL</strong> hoặc MySQL.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. Async / Await & Promise handling -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill core">A</div>
+                <h2>13. Async / Await & xử lý lỗi bất đồng bộ</h2>
+            </div>
+            <span class="tag tag-node">Async</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">13.1 Promise cơ bản</p>
+                <pre><code>function wait(ms) {
+  return new Promise((resolve) =&gt; {
+    setTimeout(() =&gt; resolve(`Đợi ${ms}ms xong`), ms);
+  });
+}
+
+wait(1000).then(console.log);</code></pre>
+
+                <p class="sub-title">13.2 async/await + try/catch</p>
+                <pre><code>async function main() {
+  try {
+    const msg = await wait(1000);
+    console.log(msg);
+  } catch (err) {
+    console.error("Lỗi:", err);
+  }
+}</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">13.3 Wrap route async (tránh quên try/catch)</p>
+                <pre><code>function asyncHandler(fn) {
+  return (req, res, next) =&gt; {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
+
+app.get("/api/test", asyncHandler(async (req, res) =&gt; {
+  const data = await wait(500);
+  res.json({ data });
+}));</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Quan trọng</span>
+                    Sai lầm hay gặp: quên <code>try/catch</code> trong async → lỗi không đi tới error middleware.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. Auth với JWT & bcrypt -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill auth">Au</div>
+                <h2>14. Authentication với JWT & bcrypt</h2>
+            </div>
+            <span class="tag tag-node">Auth</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">14.1 Cài lib</p>
+                <pre><code>npm install jsonwebtoken bcrypt</code></pre>
+
+                <p class="sub-title">14.2 Hash mật khẩu</p>
+                <pre><code>const bcrypt = require("bcrypt");
+
+async function hashPassword(plain) {
+  const saltRounds = 10;
+  const hash = await bcrypt.hash(plain, saltRounds);
+  return hash;
+}</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">14.3 Tạo & kiểm tra JWT</p>
+                <pre><code>const jwt = require("jsonwebtoken");
+
+function signToken(user) {
+  return jwt.sign(
+    { id: user.id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" }
+  );
+}
+
+// Middleware verify token
+function auth(req, res, next) {
+  const header = req.headers.authorization;
+  if (!header?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Không có token" });
+  }
+
+  const token = header.split(" ")[1];
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = payload;
+    next();
+  } catch {
+    return res.status(401).json({ message: "Token không hợp lệ" });
+  }
+}</code></pre>
+
+                <p class="note">
+                    <span class="hot-badge">Rất thường dùng</span>
+                    Đa số API hiện đại dùng <strong>JWT + bcrypt</strong> cho login / protected route.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. Deploy, PM2 & cấu hình môi trường -->
+    <section class="section">
+        <div class="sec-header">
+            <div class="sec-title">
+                <div class="pill deploy">DP</div>
+                <h2>15. Deploy NodeJS, PM2 & môi trường</h2>
+            </div>
+            <span class="tag tag-node">Deploy</span>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <p class="sub-title">15.1 PM2 – chạy Node trong production</p>
+                <pre><code>npm install -g pm2</code></pre>
+                <pre><code># Chạy app
+pm2 start index.js --name my-app
+
+# Xem list
+pm2 list
+
+# Xem log
+pm2 logs my-app
+
+# Lưu cấu hình
+pm2 save</code></pre>
+            </div>
+            <div>
+                <p class="sub-title">15.2 Tách config theo môi trường</p>
+                <ul>
+                    <li>Dùng <code>.env.development</code>, <code>.env.production</code>.</li>
+                    <li>Không commit file .env lên Git.</li>
+                </ul>
+
+                <p class="sub-title">15.3 Deploy platform</p>
+                <ul>
+                    <li>VPS: Ubuntu + Node + Nginx + PM2.</li>
+                    <li>PaaS: Render, Railway, Heroku cũ, Vercel (cho serverless function)...</li>
+                </ul>
+
+                <p class="note">
+                    <span class="hot-badge">Thực tế</span>
+                    Prod luôn cần: <strong>PM2 (hoặc tương tự) + log + env chuẩn</strong> để app chạy ổn định.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            const input = document.querySelector('.search-input');
+            const btn = document.querySelector('.search-btn');
+            const resultsEl = document.querySelector('.search-results');
+
+            if (!input || !btn || !resultsEl) return;
+
+            const sections = Array.from(document.querySelectorAll('section.section'));
+            const data = sections.map((sec, idx) => {
+                let id = sec.id;
+                if (!id) {
+                    id = 'sec-' + (idx + 1);
+                    sec.id = id;
+                }
+                const titleEl = sec.querySelector('h2');
+                const title = titleEl ? titleEl.textContent.trim() : 'Mục ' + (idx + 1);
+                const text = sec.textContent.toLowerCase();
+                return { id, title, text, element: sec };
+            });
+
+            let currentResults = [];
+            let activeIndex = -1;
+
+            function clearHighlight() {
+                document.querySelectorAll('.search-hit').forEach(el => {
+                    el.classList.remove('search-hit');
+                });
+            }
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, c => {
+                    const map = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    };
+                    return map[c] || c;
+                });
+            }
+            const current = location.pathname.split("/").pop() || "Html.html";
+
+            const map = {
+                "Html.html": "tab-html",
+                "Css.html": "tab-css",
+                "Js.html": "tab-js",
+                "NodeJs.html": "tab-node",
+                "ReacjsTailwind.html": "tab-react"
+            };
+
+            const activeId = map[current];
+            if (activeId) {
+                const el = document.getElementById(activeId);
+                if (el) el.classList.add("active");
+            }
+            function makeSnippet(fullText, query) {
+                const lower = fullText.toLowerCase();
+                const q = query.toLowerCase();
+                const idx = lower.indexOf(q);
+                if (idx === -1) return '';
+                const radius = 40;
+                let start = Math.max(0, idx - radius);
+                let end = Math.min(fullText.length, idx + q.length + radius);
+                let snippet = fullText.slice(start, end).replace(/\s+/g, ' ');
+                if (start > 0) snippet = '...' + snippet;
+                if (end < fullText.length) snippet = snippet + '...';
+                return snippet;
+            }
+
+            function renderResults(query) {
+                resultsEl.innerHTML = '';
+                activeIndex = -1;
+
+                if (!query) {
+                    return;
+                }
+
+                const q = query.toLowerCase();
+                currentResults = data.filter(sec => sec.text.includes(q));
+
+                if (currentResults.length === 0) {
+                    resultsEl.innerHTML =
+                        '<li class="search-result-empty">Không tìm thấy kết quả cho: <strong>' +
+                        escapeHtml(query) +
+                        '</strong></li>';
+                    return;
+                }
+
+                const itemsHtml = currentResults.map((sec, idx) => {
+                    const snippet = makeSnippet(sec.text, q);
+                    return `
+<li class="search-result-item" data-index="${idx}">
+  <div class="search-result-icon">⌕</div>
+  <div class="search-result-content">
+      <div class="search-result-title">${escapeHtml(sec.title)}</div>
+      <div class="search-result-snippet">${escapeHtml(snippet)}</div>
+  </div>
+</li>`;
+                }).join('');
+
+                resultsEl.innerHTML = itemsHtml;
+            }
+
+            function scrollToResult(index) {
+                const item = currentResults[index];
+                if (!item) return;
+                clearHighlight();
+                item.element.classList.add('search-hit');
+                item.element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                resultsEl.innerHTML = '';
+            }
+
+            function doSearch() {
+                const q = input.value.trim();
+                if (!q) {
+                    resultsEl.innerHTML = '';
+                    currentResults = [];
+                    activeIndex = -1;
+                    clearHighlight();
+                    return;
+                }
+                renderResults(q);
+            }
+
+            function updateActiveItem() {
+                const items = Array.from(resultsEl.querySelectorAll('.search-result-item'));
+                items.forEach((li, idx) => {
+                    li.classList.toggle('is-active', idx === activeIndex);
+                });
+            }
+
+            btn.addEventListener('click', doSearch);
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    if (currentResults.length > 0 && activeIndex >= 0) {
+                        e.preventDefault();
+                        scrollToResult(activeIndex);
+                    } else {
+                        e.preventDefault();
+                        doSearch();
+                        if (currentResults.length === 1) {
+                            scrollToResult(0);
+                        }
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    if (!currentResults.length) return;
+                    e.preventDefault();
+                    activeIndex = (activeIndex + 1) % currentResults.length;
+                    updateActiveItem();
+                } else if (e.key === 'ArrowUp') {
+                    if (!currentResults.length) return;
+                    e.preventDefault();
+                    activeIndex = (activeIndex - 1 + currentResults.length) % currentResults.length;
+                    updateActiveItem();
+                }
+            });
+
+            resultsEl.addEventListener('click', function (e) {
+                const item = e.target.closest('.search-result-item');
+                if (!item) return;
+                const index = Number(item.dataset.index);
+                scrollToResult(index);
+            });
+
+            document.addEventListener('click', function (e) {
+                const wrapper = document.querySelector('.search-wrapper');
+                if (!wrapper.contains(e.target)) {
+                    resultsEl.innerHTML = '';
+                    currentResults = [];
+                    activeIndex = -1;
+                }
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
